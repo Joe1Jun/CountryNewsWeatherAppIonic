@@ -34,6 +34,10 @@ export class CountriesPage implements OnInit {
         //Will console log to see how best to access the objects returned from the api.
         // Will then populate the countries array with these objects.
         console.log(response.data);
+        //Assign the array to the daat returned from the API
+        this.countries = response.data;
+        //Console log the array variable to see if it has been populated.
+        console.log(this.countries);
   }
 
 }
