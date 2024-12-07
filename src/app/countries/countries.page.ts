@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardHeader, IonCard, IonCardSubtitle, IonCardTitle, IonCardContent, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardHeader, IonCard,  IonCardTitle,  IonButton } from '@ionic/angular/standalone';
 import { HttpOptions } from '@capacitor/core';
 import { MyHttpServiceService } from '../services/my-http-service.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.page.html',
   styleUrls: ['./countries.page.scss'],
   standalone: true,
-  imports: [IonButton, IonCardContent, IonCardTitle, IonCardSubtitle, IonCard, IonCardHeader, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonButton,  IonCardTitle, IonCard, IonCardHeader, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,RouterLink]
 })
 export class CountriesPage implements OnInit {
   // countries will hole all the country objects retreived from the API.
