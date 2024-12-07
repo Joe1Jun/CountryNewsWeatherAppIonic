@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { HttpOptions } from '@capacitor/core';
+import { MyHttpServiceService } from '../services/my-http-service.service';
 
 @Component({
   selector: 'app-countries',
@@ -15,15 +16,24 @@ export class CountriesPage implements OnInit {
   // countries will hole all the country objects retreived from the API.
   // Therefore is intialised as an empty array that can hold any type of data.
   countries : any [] = [];
-  option : HttpOptions = {
+  options : HttpOptions = {
     url : "https://restcountries.com/v3.1/all"
   }
 
-  constructor() { }
+  constructor(private mhs : MyHttpServiceService) { }
 
   ngOnInit() {
-     
+    //Cant implement the function in NgOnInit as it cant handle asynchronous functions
+    this.getAllCountries(); 
     
+  }
+// This function will return a list of all countries by making an HTTP GET request.
+// It uses the 'get' method from MyHttpServiceService to fetch data based on the provided options.
+    async getAllCountries(){
+        const response = await this.mhs.get(this.options);
+        //Will console log to see how best to access the objects returned from the api.
+        // Will then populate the countries array with these objects.
+        console.log(response.data);
   }
 
 }
