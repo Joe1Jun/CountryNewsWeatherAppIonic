@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonCardContent } from '@ionic/angular/standalone';
 import { HttpOptions } from '@capacitor/core';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 
@@ -10,7 +10,7 @@ import { MyHttpServiceService } from '../services/my-http-service.service';
   templateUrl: './news.page.html',
   styleUrls: ['./news.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class NewsPage implements OnInit {
 
@@ -33,7 +33,11 @@ constructor(private mhs : MyHttpServiceService){}
     const response = await this.mhs.get(this.options);
     // Log the data to the console to inspect the attributes
     console.log(response.data.results);
-
+ 
+    // Populate the array with the news objects 
+    this.news = response.data.results;
+    //console log to check if it matches
+    console.log(this.news);
 
   }
   
