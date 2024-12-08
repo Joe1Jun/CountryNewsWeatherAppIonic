@@ -4,16 +4,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-card *ngFor="let news of news">
-    <img alt="news picture" src="{{news.image_url}}" />
+<ion-content [fullscreen]="true" *ngIf="!loading">
+  <ion-card *ngFor="let newsArticle of news">
+    <img alt="News Picture" src="{{newsArticle.image_url}}" />
     <ion-card-header>
-      <ion-card-title>{{news.title}}</ion-card-title>
-      <ion-card-subtitle>{{news.description}}</ion-card-subtitle>
+      <ion-card-title>{{newsArticle.description}}</ion-card-title>
+      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
     </ion-card-header>
   
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
+    
   </ion-card>
+ 
 </ion-content>
