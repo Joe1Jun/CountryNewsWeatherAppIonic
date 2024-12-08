@@ -1,11 +1,14 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" *ngIf="!loading">
   <ion-toolbar>
     <ion-title>Weather for {{weather.location.name}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
+
+
+
 <ion-content [fullscreen]="true">
-  <ion-card>
+  <ion-card *ngIf="!loading">
     <img alt="Silhouette of mountains" src="{{weather.current.weather_icons}}" />
     <ion-card-header>
       <ion-card-title>Weather in {{weather.location.name}} is {{weather.current.weather_descriptions}}</ion-card-title>
