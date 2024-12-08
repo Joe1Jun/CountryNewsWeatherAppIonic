@@ -15,6 +15,10 @@ export const routes: Routes = [
     loadComponent: () => import('./countries/countries.page').then( m => m.CountriesPage)
   },
   {
+    path: 'countries/:searchTerm',
+    loadComponent: () => import('./countries/countries.page').then( m => m.CountriesPage)
+  },
+  {
     path: 'news',
     loadComponent: () => import('./news/news.page').then( m => m.NewsPage)
   },
