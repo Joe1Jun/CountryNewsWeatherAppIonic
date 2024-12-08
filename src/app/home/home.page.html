@@ -7,9 +7,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-input placeholder="Enter Country"></ion-input>
+  <ion-input placeholder="Enter Country" [(ngModel)]="searchTerm"></ion-input>
   <br>
   <!--The button will route to the countries page-->
   <!--Will add paramaters to the route later-->
-  <ion-button [routerLink]="['/countries']">Search</ion-button>
+  <ion-button [routerLink]="['/countries', searchTerm]">Search</ion-button>
 </ion-content>
