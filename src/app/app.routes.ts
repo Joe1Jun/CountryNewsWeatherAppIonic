@@ -19,7 +19,7 @@ export const routes: Routes = [
     loadComponent: () => import('./countries/countries.page').then( m => m.CountriesPage)
   },
   {
-    path: 'news',
+    path: 'news/:countryCode',
     loadComponent: () => import('./news/news.page').then( m => m.NewsPage)
   },
   {

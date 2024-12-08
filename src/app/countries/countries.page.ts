@@ -14,6 +14,9 @@ import { ActivatedRoute,  RouterLink } from '@angular/router';
   imports: [IonButton,  IonCardTitle, IonCard, IonCardHeader, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,RouterLink]
 })
 export class CountriesPage implements OnInit {
+
+  
+  
   // This will store the searchTerm parameter in the route.
   searchTerm! : string;
 
@@ -78,6 +81,7 @@ export class CountriesPage implements OnInit {
     try {
       const response = await this.mhs.get(options);
       this.countries = response.data;
+      
       console.log(this.countries);
 
     } catch (error) {
