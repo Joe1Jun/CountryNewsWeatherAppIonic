@@ -1,16 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>weather</ion-title>
+    <ion-title>Weather for {{weather.location.name}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card-header>
-    <ion-card-title>Card Title</ion-card-title>
-    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-  </ion-card-header>
-
-  <ion-card-content>
-    Here's a small text description for the card content. Nothing more, nothing less.
-  </ion-card-content>
+  <ion-card>
+    <img alt="Silhouette of mountains" src="{{weather.current.weather_icons}}" />
+    <ion-card-header>
+      <ion-card-title>Weather in {{weather.location.name}} is {{weather.current.weather_descriptions}}</ion-card-title>
+      <ion-card-subtitle>{{weather.location.localtime}}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Here's a small text description for the card content. Nothing more, nothing less.
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
