@@ -5,15 +5,28 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root'
 })
 export class DataServiceService {
+  //This stoage variable is used to store the initialized instance of storage after calling the create method
+ private _storage! :Storage 
 
-
-  constructor(private storage : Storage ) { }
-
-
-  async setItem(key : string, value:any){
-    await this.storage.set(key,value);
+  constructor(private storage : Storage ) { 
+    //cannot use this method in the constructor as it is an async method
+    this.init();
+  }
+//private method to initialise the storage object
+  private async init(){
+    //Before create the storage instance doesnt have a configured driver so calling the methods would fail
+    const storage = await this.storage.create();
+    //After create the storage variable hold the intialised driver instance so methods can be called.
+    this._storage = storage;
+    console.log('Storage initialized with driver:', this._storage.driver);
   }
 
+  //This method will set the item in storage as a key value pair
+  async setItem(key : string, value:any){
+    await this._storage.set(key, value);
+    console.log(value + ' set successfully!');
+  }
+//This item will retrieve the item from storage.
   async getItem(key : string){
     await this.storage.get(key);
   }

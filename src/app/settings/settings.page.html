@@ -5,9 +5,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-checkbox (click)="setCelcius()">Celcius</ion-checkbox>
-  <br>
-  <ion-checkbox (click)="setFahrenheit()">Fahrenheit</ion-checkbox>
-  <br>
-  <ion-checkbox (click)="setScientific()">Scientific</ion-checkbox>
+  <ion-checkbox [(ngModel)]="selectedCelcius">Celcius</ion-checkbox>
+<br>
+<ion-checkbox [(ngModel)]="selectedFahrenheit">Fahrenheit</ion-checkbox>
+<br>
+<ion-checkbox [(ngModel)]="selectedScientific">Scientific</ion-checkbox>
+<br>
+<ion-button (click)="saveSelection()">Submit</ion-button>
 </ion-content>
