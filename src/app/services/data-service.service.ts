@@ -27,8 +27,9 @@ export class DataServiceService {
     console.log(value + ' set successfully!');
   }
 //This item will retrieve the item from storage.
-  async getItem(key : string){
-    await this.storage.get(key);
+  async getItem(key : string) : Promise<string> {
+    return await this.storage.get(key);
+    
   }
 
   async removeItem(key:string){

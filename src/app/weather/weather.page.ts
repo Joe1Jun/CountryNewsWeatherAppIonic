@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard } from '@ionic/angular/standalone';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
+import { DataServiceService } from '../services/data-service.service';
 
 @Component({
   selector: 'app-weather',
@@ -18,17 +19,28 @@ export class WeatherPage implements OnInit {
   // Indicates whether data is being fetched.
   loading! :boolean 
 // This variable hold the url to the API that returns the weather data
+ tempType! : string ;
   options : HttpOptions = {
     url : "http://api.weatherstack.com/current?access_key=08547bc95ccf226b8a72dcf4d47e5e94&query=New York"
   }
 
 
-  constructor(private mhs : MyHttpServiceService) { }
+  constructor(private mhs : MyHttpServiceService, private mds :DataServiceService) { }
 
   ngOnInit() {
     // Call the getWeather method from ngOnInit as it is not possible to define an async method in ngOnInit
-    this.getWeather()
+    
   }
+
+ ionViewWillEnter(){
+  this.getWeather()
+}
+
+async getTempType(){
+   const tempType = await this.mds.getItem('temperatureType');
+   this.tempType = tempType;
+   console.log(this.tempType)
+}
 
   async getWeather(){
     // Set loading to true while data is being fetched.
