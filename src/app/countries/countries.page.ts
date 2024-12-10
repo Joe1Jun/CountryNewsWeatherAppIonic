@@ -85,6 +85,8 @@ export class CountriesPage implements OnInit {
       this.countries = response.data;
       
       console.log(this.countries);
+      
+
 
     } catch (error) {
       console.log("Error retrieving countries", error);
@@ -92,5 +94,8 @@ export class CountriesPage implements OnInit {
 
 
   }
+
+  
+  
 
 }

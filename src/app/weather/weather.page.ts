@@ -36,11 +36,11 @@ apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
   ngOnInit() {
     // Call the getWeather method from ngOnInit as it is not possible to define an async method in ngOnInit
     this.route.paramMap.subscribe((params) =>{
-      this.latitude = parseFloat(params.get('lat') || '0');
-      this.longtitude = parseFloat(params.get('long') || '0');
+      this.latitude = parseFloat(params.get('lat')!);
+      this.longtitude = parseFloat(params.get('long')!);
 
-      console.log(this.latitude)
-      console.log(this.longtitude)
+      console.log('Latitude:', this.latitude); // Logs 38.89
+      console.log('Longitude:', this.longtitude); // Logs -77.05
       
      })
 
