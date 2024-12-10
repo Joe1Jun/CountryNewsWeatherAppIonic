@@ -38,4 +38,12 @@ export const routes: Routes = [
     path: 'footer',
     loadComponent: () => import('./footer/footer.page').then( m => m.FooterPage)
   },
+  {
+    path: 'header',
+    loadComponent: () => import('./shared/header/header.page').then( m => m.HeaderPage)
+  },
+  {
+    path: 'footer',
+    loadComponent: () => import('./shared/footer/footer.page').then( m => m.FooterPage)
+  },
 ];
