@@ -30,4 +30,12 @@ export const routes: Routes = [
     path: 'settings',
     loadComponent: () => import('./settings/settings.page').then( m => m.SettingsPage)
   },
+  {
+    path: 'header',
+    loadComponent: () => import('./header/header.page').then( m => m.HeaderPage)
+  },
+  {
+    path: 'footer',
+    loadComponent: () => import('./footer/footer.page').then( m => m.FooterPage)
+  },
 ];
