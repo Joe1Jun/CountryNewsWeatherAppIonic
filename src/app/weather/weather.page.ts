@@ -16,10 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WeatherPage implements OnInit {
   //Taken from the params
-  cityName! : string;
-  countryCode!: string ;
-  limit : number = 5;
-
+  
 
   // weather is actually an object as it only returns one object for each request
   weather : any  = {};
@@ -27,6 +24,7 @@ export class WeatherPage implements OnInit {
   loading! :boolean 
 // This variable hold the url to the API that returns the weather data
  tempType! : string ;
+ 
  
 
 
@@ -37,11 +35,8 @@ export class WeatherPage implements OnInit {
     this.getTempType();
     this.getWeather()
 
-   this.route.paramMap.subscribe((params) => {
-     this.cityName = params.get('city') || ' ';
-     console.log(this.cityName)
-
-   })
+   
+   
 
   }
 
@@ -56,11 +51,11 @@ async getTempType(){
 }
 
   async getWeather(){
-    let options :HttpOptions = {
 
-     url: "http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=8bad249b0b4bef6ad8a518b937c7d010"
-    
+    let options : HttpOptions = {
+      url : "http."
     }
+   
     // Set loading to true while data is being fetched.
       this.loading = true;
    // Surround the API request in a try catch in case of errors.   
