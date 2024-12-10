@@ -16,8 +16,8 @@ import { DataServiceService } from '../services/data-service.service';
 })
 export class NewsPage implements OnInit {
  
-loading! : boolean;
- country! : string;
+ loading! : boolean;
+ country! :string;
  countryCode! : string; 
  news : any [] = [];
  tempType! : string ;
@@ -30,7 +30,10 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
   ngOnInit(): void {
     this.getTempType();
 
+    
+
     this.route.paramMap.subscribe((params) => {
+      this.country = params.get('country') || ' ';
       this.countryCode = params.get('countryCode') || '';
       console.log(this.countryCode)
       if(this.countryCode){

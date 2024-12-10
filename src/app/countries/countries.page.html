@@ -1,8 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>countries</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
 <ion-content [fullscreen]="true">
   <!--Used the card component from  https://ionicframework.com/docs/api/card -->
@@ -14,10 +10,10 @@
       <ion-card-title>{{country.name.common}}</ion-card-title>
      </ion-card-header>
      <!--This button will route to the news page-->
-     <ion-button [routerLink]="['/news',country.cca2]">News</ion-button>
+     <ion-button [routerLink]="['/news', country.name.common, country.cca2]">News</ion-button>
      <br>
      <!--This button will route to the weather page-->
-     <ion-button [routerLink]="['/weather']">Weather</ion-button>  
+     <ion-button [routerLink]="['/weather', country.capital[0]]">Weather</ion-button>  
    
   </ion-card>
 </ion-content>

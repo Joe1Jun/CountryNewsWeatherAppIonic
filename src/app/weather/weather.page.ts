@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardContent, IonCardSub
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
 import { DataServiceService } from '../services/data-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-weather',
@@ -14,23 +15,33 @@ import { DataServiceService } from '../services/data-service.service';
   imports: [IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class WeatherPage implements OnInit {
+  //Taken from the params
+  cityName! : string;
+  countryCode!: string ;
+  limit : number = 5;
+
+
   // weather is actually an object as it only returns one object for each request
   weather : any  = {};
   // Indicates whether data is being fetched.
   loading! :boolean 
 // This variable hold the url to the API that returns the weather data
  tempType! : string ;
-  options : HttpOptions = {
-    url : "https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=8bad249b0b4bef6ad8a518b937c7d010"
-  }
+ 
 
 
-  constructor(private mhs : MyHttpServiceService, private mds :DataServiceService) { }
+  constructor(private mhs : MyHttpServiceService, private mds :DataServiceService, private route : ActivatedRoute) { }
 
   ngOnInit() {
     // Call the getWeather method from ngOnInit as it is not possible to define an async method in ngOnInit
     this.getTempType();
     this.getWeather()
+
+   this.route.paramMap.subscribe((params) => {
+     this.cityName = params.get('city') || ' ';
+     console.log(this.cityName)
+
+   })
 
   }
 
@@ -45,12 +56,17 @@ async getTempType(){
 }
 
   async getWeather(){
+    let options :HttpOptions = {
+
+     url: "http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=8bad249b0b4bef6ad8a518b937c7d010"
+    
+    }
     // Set loading to true while data is being fetched.
       this.loading = true;
    // Surround the API request in a try catch in case of errors.   
      try {
       // The Api response will be held in the response variable returned from myHttpService
-      const response = await this.mhs.get(this.options);
+      const response = await this.mhs.get(options);
       // Assign the object variable this.weather to the response data
      this.weather = response.data;
      // Console log to see full object in the console
