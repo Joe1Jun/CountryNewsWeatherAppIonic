@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonInput, IonButton } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HeaderPage } from '../shared/header/header.page';
@@ -8,7 +8,7 @@ import { HeaderPage } from '../shared/header/header.page';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonButton, IonInput, IonHeader, IonToolbar, IonTitle, IonContent,RouterLink, FormsModule,HeaderPage],
+  imports: [IonButton, IonInput, IonContent,RouterLink, FormsModule,HeaderPage],
 })
 export class HomePage {
   searchTerm! : string

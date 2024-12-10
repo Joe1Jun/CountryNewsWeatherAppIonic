@@ -2,8 +2,17 @@
 
 ion-button {
   width: 300px;
-  padding: 5px ;
+  padding: 2px ;
+
+}
+
+.buttons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }
 ion-input{
  text-align: center;
+
 }
