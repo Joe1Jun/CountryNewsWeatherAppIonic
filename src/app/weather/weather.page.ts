@@ -21,7 +21,7 @@ export class WeatherPage implements OnInit {
 // This variable hold the url to the API that returns the weather data
  tempType! : string ;
   options : HttpOptions = {
-    url : "http://api.weatherstack.com/current?access_key=08547bc95ccf226b8a72dcf4d47e5e94&query=New York"
+    url : "https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=8bad249b0b4bef6ad8a518b937c7d010"
   }
 
 
@@ -29,11 +29,13 @@ export class WeatherPage implements OnInit {
 
   ngOnInit() {
     // Call the getWeather method from ngOnInit as it is not possible to define an async method in ngOnInit
-    
+    this.getTempType();
+    this.getWeather()
+
   }
 
  ionViewWillEnter(){
-  this.getWeather()
+  
 }
 
 async getTempType(){

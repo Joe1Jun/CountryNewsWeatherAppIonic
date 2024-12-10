@@ -16,7 +16,7 @@ import { DataServiceService } from '../services/data-service.service';
 })
 export class NewsPage implements OnInit {
  
-  loading! : boolean;
+loading! : boolean;
  country! : string;
  countryCode! : string; 
  news : any [] = [];
