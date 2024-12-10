@@ -24,14 +24,29 @@ export class WeatherPage implements OnInit {
   loading! :boolean 
 // This variable hold the url to the API that returns the weather data
  tempType! : string ;
+latitude! : number;
+longtitude! : number;
+
  
- 
+apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
 
 
   constructor(private mhs : MyHttpServiceService, private mds :DataServiceService, private route : ActivatedRoute) { }
 
   ngOnInit() {
     // Call the getWeather method from ngOnInit as it is not possible to define an async method in ngOnInit
+    this.route.paramMap.subscribe((params) =>{
+      this.latitude = parseFloat(params.get('lat') || '0');
+      this.longtitude = parseFloat(params.get('long') || '0');
+
+      console.log(this.latitude)
+      console.log(this.longtitude)
+      
+     })
+
+    
+    
+    
     this.getTempType();
     this.getWeather()
 
@@ -53,7 +68,7 @@ async getTempType(){
   async getWeather(){
 
     let options : HttpOptions = {
-      url : "http."
+     url : `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longtitude}&appid=${this.apiKey}`
     }
    
     // Set loading to true while data is being fetched.

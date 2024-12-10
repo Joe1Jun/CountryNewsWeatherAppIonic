@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardHeader, IonCard,  IonCardTitle,  IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonCardHeader, IonCard,  IonCardTitle,  IonButton } from '@ionic/angular/standalone';
 import { HttpOptions } from '@capacitor/core';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { ActivatedRoute,  RouterLink } from '@angular/router';
@@ -11,7 +11,7 @@ import { HeaderPage } from '../shared/header/header.page';
   templateUrl: './countries.page.html',
   styleUrls: ['./countries.page.scss'],
   standalone: true,
-  imports: [IonButton,IonCardTitle, IonCard, IonCardHeader, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, RouterLink, HeaderPage]
+  imports: [IonButton,IonCardTitle, IonCard, IonCardHeader, IonContent,  CommonModule, FormsModule, RouterLink, HeaderPage]
 })
 export class CountriesPage implements OnInit {
 

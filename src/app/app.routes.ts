@@ -23,7 +23,7 @@ export const routes: Routes = [
     loadComponent: () => import('./news/news.page').then( m => m.NewsPage)
   },
   {
-    path: 'weather',
+    path: 'weather/:lat/:long',
     loadComponent: () => import('./weather/weather.page').then( m => m.WeatherPage)
   },
   {
@@ -39,8 +39,6 @@ export const routes: Routes = [
     path: 'footer',
     loadComponent: () => import('./shared/footer/footer.page').then( m => m.FooterPage)
   },
-  {
-    path: 'cities/:countryCode',
-    loadComponent: () => import('./cities/cities.page').then( m => m.CitiesPage)
-  },
+  
+   
 ];
