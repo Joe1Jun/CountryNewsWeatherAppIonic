@@ -14,7 +14,7 @@ import { HeaderPage } from '../shared/header/header.page';
   imports: [IonButton,IonCardTitle, IonCard, IonCardHeader, IonContent,  CommonModule, FormsModule, RouterLink, HeaderPage]
 })
 export class CountriesPage implements OnInit {
-
+   
   
   
   // This will store the searchTerm parameter in the route.
@@ -29,6 +29,8 @@ export class CountriesPage implements OnInit {
   constructor(private mhs : MyHttpServiceService, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    
+
     // Use activated route to get the parameter from the route.
     this.route.paramMap.subscribe((params) => {
        // Extract searchTerm from the route or default to an empty string
