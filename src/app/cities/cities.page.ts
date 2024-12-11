@@ -36,7 +36,14 @@ export class CitiesPage implements OnInit {
   async getCities(){
        
     let options : HttpOptions = {
-      url :  `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=${this.countryCode}&sort=-population&limit=${this.cityLimit}`
+     url :  `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=${this.countryCode}&sort=-population&limit=${this.cityLimit}`,
+     
+     headers : {
+      'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
+      'x-rapidapi-key': 'fa92f03d5amshb8d1244b10adbbbp102952jsn540534327d75'
+
+     }
+
     }
 try {
 
