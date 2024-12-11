@@ -23,7 +23,7 @@ export const routes: Routes = [
     loadComponent: () => import('./news/news.page').then( m => m.NewsPage)
   },
   {
-    path: 'weather/:lat/:long',
+    path: 'weather/:city/:lat/:long',
     loadComponent: () => import('./weather/weather.page').then( m => m.WeatherPage)
   },
   {

@@ -9,7 +9,7 @@
 
  <div class="cities" *ngFor="let city of cities">
 <!-- Passing the latitude and longitude to the weather page-->
-  <ion-button [routerLink]="['/weather', city.latitude, city.longitude]">Weather for {{city.name}}</ion-button>
+  <ion-button [routerLink]="['/weather', city.name, city.latitude, city.longitude]">Weather for {{city.name}}</ion-button>
 </div>
 
  

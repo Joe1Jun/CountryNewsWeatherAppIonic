@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" *ngIf="weather?.name">
   <ion-toolbar>
-    <ion-title>Weather for {{weather.name}} </ion-title>
+    <ion-title>Weather for {{city}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +14,7 @@
     
    
     <ion-card-header>
-      <ion-card-title>Weather in {{weather.name}} is {{weather.weather[0].description}} </ion-card-title>
+      <ion-card-title>Weather in {{city}} is {{weather.weather[0].description}} </ion-card-title>
       <ion-card-subtitle>Current temperature: {{weather.main.temp}}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>

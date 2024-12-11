@@ -20,7 +20,7 @@ export class WeatherPage implements OnInit {
 
   // weather is actually an object as it only returns one object for each request
   weather : any  = {};
- 
+  city! : string;
 // This variable hold the url to the API that returns the weather data
   units! : string 
  latitude! : number;
@@ -35,6 +35,7 @@ apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
   ngOnInit() {
     // Call the getWeather method from ngOnInit as it is not possible to define an async method in ngOnInit
     this.route.paramMap.subscribe((params) =>{
+      this.city = params.get('city') || '';
       this.latitude = parseFloat(params.get('lat')!);
       this.longtitude = parseFloat(params.get('long')!);
 
