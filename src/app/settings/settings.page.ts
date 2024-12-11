@@ -27,14 +27,14 @@ export class SettingsPage implements OnInit {
 
   saveSelection() {
     if (this.selectedCelcius) {
-      this.mds.setItem(this.value, 'celcius')
-        
+      this.mds.setItem(this.value, 'metric')
+      console.log('Metric units set successfully!');
       } else if (this.selectedFahrenheit) {
-      this.mds.setItem(this.value, 'fahrenheit')
-        console.log('Fahrenheit set successfully!');
+      this.mds.setItem(this.value, 'imperial')
+        console.log('Imperial units set successfully!');
       } else if (this.selectedScientific) {
-       this.mds.setItem(this.value, 'scientific')
-        console.log('Scientific set successfully!');
+       this.mds.setItem(this.value, 'standard')
+        console.log('standard set successfully!');
       }
   }
 

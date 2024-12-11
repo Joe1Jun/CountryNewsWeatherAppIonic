@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" *ngIf="!loading">
+<ion-header [translucent]="true" *ngIf="weather?.name">
   <ion-toolbar>
     <ion-title>Weather for {{weather.name}} </ion-title>
   </ion-toolbar>
@@ -8,7 +8,7 @@
 
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngIf="!loading">
+  <ion-card *ngIf="weather?.weather?.[0] ">
     <img [src]="'https://openweathermap.org/img/wn/' + weather.weather[0].icon + '@2x.png'" alt="Weather Icon" />
       
     

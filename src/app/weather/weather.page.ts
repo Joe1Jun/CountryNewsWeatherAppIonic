@@ -20,12 +20,11 @@ export class WeatherPage implements OnInit {
 
   // weather is actually an object as it only returns one object for each request
   weather : any  = {};
-  // Indicates whether data is being fetched.
-  loading! :boolean 
+ 
 // This variable hold the url to the API that returns the weather data
- tempType! : string ;
-latitude! : number;
-longtitude! : number;
+  units! : string 
+ latitude! : number;
+ longtitude! : number;
 
  
 apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
@@ -46,10 +45,10 @@ apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
 
     
     
+    // Had to chain these otherwise 
+   
     
-    this.getTempType();
-    this.getWeather()
-
+    this.setUpTemperature();
    
    
 
@@ -59,20 +58,30 @@ apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
   
 }
 
+//This promise inside the method is essential so that the units specified by the user 
+// can be added to the API route. Otherwise the weather data woud render before units is retrieved from storage
+setUpTemperature(){
+  this.getTempType().then(() => {
+    this.getWeather()
+
+
+  })
+}
+
 async getTempType(){
    const tempType = await this.mds.getItem('temperatureType');
-   this.tempType = tempType;
-   console.log(this.tempType)
+   this.units = tempType;
+   console.log(this.units)
 }
 
   async getWeather(){
+     
 
+    
     let options : HttpOptions = {
-     url : `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longtitude}&appid=${this.apiKey}`
+     url : `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longtitude}&units=${this.units}&appid=${this.apiKey}`
     }
    
-    // Set loading to true while data is being fetched.
-      this.loading = true;
    // Surround the API request in a try catch in case of errors.   
      try {
       // The Api response will be held in the response variable returned from myHttpService
@@ -85,10 +94,7 @@ async getTempType(){
      } catch (error) {
         console.log("Error retrieving weather data" , error);
       
-     } finally{
-      // Set the loading once again to false once the try catch block has completed.
-         this.loading = false;
-     }
+     } 
 
 
   }

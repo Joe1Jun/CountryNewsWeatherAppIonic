@@ -4,10 +4,11 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- The content will only render if the array is populate.This means it will wait until the data is returned-->
 <ion-content [fullscreen]="true" *ngIf="cities && cities.length > 0" >
 
  <div class="cities" *ngFor="let city of cities">
-
+<!-- Passing the latitude and longitude to the weather page-->
   <ion-button [routerLink]="['/weather', city.latitude, city.longitude]">Weather for {{city.name}}</ion-button>
 </div>
 
