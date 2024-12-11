@@ -36,7 +36,8 @@ export class CitiesPage implements OnInit {
   async getCities(){
        
     let options : HttpOptions = {
-     url :  `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=${this.countryCode}&sort=-population&limit=${this.cityLimit}`,
+      
+      url: `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=${this.countryCode}&sort=-population&limit=${this.cityLimit}&types=CITY`,
      
      headers : {
       'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
@@ -49,7 +50,10 @@ try {
 
    const response = await this.mhs.get(options);
     console.log(response.data);
-    this.cities = response.data;
+   // Filter the cities where type is 'CITY'
+   this.cities = response.data
+  
+
   
 } catch (error) {
   
