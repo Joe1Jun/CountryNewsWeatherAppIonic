@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
@@ -11,9 +11,11 @@ import { HttpOptions } from '@capacitor/core';
   templateUrl: './cities.page.html',
   styleUrls: ['./cities.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class CitiesPage implements OnInit {
+
+  country! : string;
   cities! : any [];
   countryCode! : string ;
   cityLimit : number = 5;
@@ -24,12 +26,17 @@ export class CitiesPage implements OnInit {
   ngOnInit() {
 
     this.route.paramMap.subscribe((params) => {
-        this.countryCode = params.get('countryCode') || ' '
+      this.country = params.get('country') || ''
+      this.countryCode = params.get('countryCode') || ' '
 
 
     })
 
-    this.getCities();
+    
+  }
+
+  ionViewWillEnter(){
+    this.getCities()
   }
 
 
@@ -51,7 +58,7 @@ try {
    const response = await this.mhs.get(options);
     console.log(response.data);
    // Filter the cities where type is 'CITY'
-   this.cities = response.data
+   this.cities = response.data.data
   
 
   
