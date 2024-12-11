@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonSpinner } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cities',
   templateUrl: './cities.page.html',
   styleUrls: ['./cities.page.scss'],
   standalone: true,
-  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,RouterLink]
 })
 export class CitiesPage implements OnInit {
 
@@ -19,6 +20,7 @@ export class CitiesPage implements OnInit {
   cities! : any [];
   countryCode! : string ;
   cityLimit : number = 5;
+  
 
  
   constructor(private route : ActivatedRoute, private mhs : MyHttpServiceService) { }
@@ -31,17 +33,15 @@ export class CitiesPage implements OnInit {
 
 
     })
-
+  this.getCities();
     
   }
 
-  ionViewWillEnter(){
-    this.getCities()
-  }
+  
 
 
   async getCities(){
-       
+     
     let options : HttpOptions = {
       
       url: `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=${this.countryCode}&sort=-population&limit=${this.cityLimit}&types=CITY`,
@@ -63,6 +63,8 @@ try {
 
   
 } catch (error) {
+
+  console.log("Error retrieving data" , error)
   
 }
   

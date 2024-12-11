@@ -4,11 +4,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" *ngFor="let city of cities" >
+<ion-content [fullscreen]="true" *ngIf="cities && cities.length > 0" >
+
+ <div class="cities" *ngFor="let city of cities">
+
+  <ion-button [routerLink]="['/weather', city.latitude, city.longitude]">Weather for {{city.name}}</ion-button>
+</div>
 
  
-
-    <ion-button>Weather for {{city.name}}</ion-button>
     
   
  
