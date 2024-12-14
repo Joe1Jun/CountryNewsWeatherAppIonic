@@ -23,7 +23,7 @@ export class CitiesPage implements OnInit {
   userLocationInput! : string;
   //This will hold the value of the lat and long values of the user input city returned from the api call 
   latitude! : number;
-  logitude! : number;
+  longitude! : number;
   apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
  
   constructor(private route : ActivatedRoute, private mhs : MyHttpServiceService) { }
@@ -51,10 +51,10 @@ export class CitiesPage implements OnInit {
 
      const response = await this.mhs.get(options);
      console.log(response.data);
-     this.latitude = response.data.latitude
-     this.logitude = response.data.logitude;
+     this.latitude = response.data.lat
+     this.longitude = response.data.long;
      console.log(this.latitude)
-     console.log(this.logitude);     
+     console.log(this.longitude);     
      }
 
   }
