@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
 import { RouterLink } from '@angular/router';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cities',
   templateUrl: './cities.page.html',
@@ -26,7 +26,7 @@ export class CitiesPage implements OnInit {
   longitude! : number;
   apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
  
-  constructor(private route : ActivatedRoute, private mhs : MyHttpServiceService) { }
+  constructor(private route : ActivatedRoute, private router : Router, private mhs : MyHttpServiceService) { }
 
   ngOnInit() {
 
@@ -48,13 +48,26 @@ export class CitiesPage implements OnInit {
         url : `http://api.openweathermap.org/geo/1.0/direct?q=${this.userLocationInput},${this.countryCode}&appid=${this.apiKey}`
 
      }
+  try {
 
-     const response = await this.mhs.get(options);
-     console.log(response.data);
-     this.latitude = response.data[0].lat
-     this.longitude = response.data[0].lon;
-     console.log(this.latitude)
-     console.log(this.longitude);     
+    const response = await this.mhs.get(options);
+    console.log(response.data);
+    this.latitude = response.data[0].lat
+    this.longitude = response.data[0].lon;
+    console.log(this.latitude)
+    console.log(this.longitude); 
+    
+     // Navigate to the weather page with coordinates 
+     // If the API has returned correct coordinated the Router will automatically navigate to the weather page
+     // passing the parameters
+     this.router.navigate(['/weather', this.userLocationInput, this.latitude, this.longitude]);
+    }
+    
+     catch (error) {
+    console.log("Error fetching coordinates" , error)
+    
+  }
+     
      }
 
   }
@@ -79,7 +92,7 @@ try {
 
    const response = await this.mhs.get(options);
     console.log(response.data);
-   // Filter the cities where type is 'CITY'
+   
    this.cities = response.data.data
   
 
