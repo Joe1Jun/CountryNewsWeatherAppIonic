@@ -15,11 +15,11 @@ import { Header2Page } from '../shared/header2/header2.page';
 })
 export class WeatherFavouritesPage implements OnInit {
 
-  weather : any  = {};
+  coordinates : any  = [];
   city! : string;
   units! : string 
- latitude! : number;
- longtitude! : number;
+ latitude! :  number [];
+ longitude! : number [];
  apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
   constructor(private mds :DataServiceService, private mhs : MyHttpServiceService) { }
 
@@ -35,6 +35,13 @@ export class WeatherFavouritesPage implements OnInit {
     console.log(response);
     this.weather = response
     
+    for (let i = 0 ; i < this.weather.length; i++){
+      this.latitude[i] = this.weather[i].latitude;
+      this.longitude[i] = this.weather[i].longitude;
+    }
+    
+    console.log(this.latitude)
+    console.log(this.longitude)
    
   }
 
@@ -44,7 +51,7 @@ export class WeatherFavouritesPage implements OnInit {
 
     
     let options : HttpOptions = {
-     url : `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longtitude}&units=${this.units}&appid=${this.apiKey}`
+     url : `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&units=${this.units}&appid=${this.apiKey}`
     }
    
    // Surround the API request in a try catch in case of errors.   

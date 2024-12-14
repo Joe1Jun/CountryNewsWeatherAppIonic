@@ -42,7 +42,7 @@ export class DataServiceService {
   async saveWeatherLocation(key: string, location: any) {
     //  Retrieve the current weather locations array
     const weatherArray = await this.getArray(key);
-    console.log( weatherArray);
+    console.log('Current weather locations:', weatherArray);
   
     //  Add the new location data
     weatherArray.push(location);
@@ -55,12 +55,7 @@ export class DataServiceService {
   async getArray(key: string): Promise<any[]> {
     //  Retrieve the array from storage or return an empty array if not found
     const data = await this.storage.get(key);
-    if(data){
-      return JSON.parse(data)
-    }else{
-       return  []
-    }
-    ;
+    return data ? JSON.parse(data) : [];
   }
   
   async removeItemFromArray(){

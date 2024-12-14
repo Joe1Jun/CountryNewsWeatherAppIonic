@@ -81,7 +81,7 @@ async getTempType(){
 
     
     let options : HttpOptions = {
-     url : `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longtitude}&units=${this.units}&appid=${this.apiKey}`
+     url : `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&units=${this.units}&appid=${this.apiKey}`
     }
    
    // Surround the API request in a try catch in case of errors.   
