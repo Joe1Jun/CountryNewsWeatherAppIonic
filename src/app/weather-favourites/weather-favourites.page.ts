@@ -15,7 +15,8 @@ import { Header2Page } from '../shared/header2/header2.page';
 })
 export class WeatherFavouritesPage implements OnInit {
 
-  weather : any = []
+  weatherLocations : any = []
+  // tHIS VARIABLES
   coordinates : any  = [];
   city! : string;
   units! : string 
@@ -57,10 +58,11 @@ export class WeatherFavouritesPage implements OnInit {
      try {
       // The Api response will be held in the response variable returned from myHttpService
       const response = await this.mhs.get(options);
-      // Assign the object variable this.weather to the response data
-     this.weather = response.data;
+
+      // this populates the weather array as the items are retrieved from the API
+     this.weatherLocations.push(response.data);
      // Console log to see full object in the console
-     console.log(this.weather);
+     console.log(this.weatherLocations);
      // This will catch an error and display it in the console.
      } catch (error) {
         console.log("Error retrieving weather data" , error);
