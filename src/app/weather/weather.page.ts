@@ -108,7 +108,8 @@ async getTempType(){
     // This object holds the values to be saved to storage
     const location = {
       latitude :this.latitude,
-      longitude : this.longitude
+      longitude : this.longitude,
+       name : this.city
     }
 
     this.mds.saveWeatherLocation('weatherLocations', location )

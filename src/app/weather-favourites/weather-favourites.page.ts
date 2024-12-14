@@ -18,7 +18,7 @@ export class WeatherFavouritesPage implements OnInit {
   weatherLocations : any = []
   // tHIS VARIABLES
   coordinates : any  = [];
-  city! : string;
+  
   units! : string 
  
  apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
@@ -35,11 +35,14 @@ export class WeatherFavouritesPage implements OnInit {
     const response = await  this.mds.getArray('weatherLocations')
     console.log(response);
     this.coordinates = response;
+
     for(let i = 0 ;i <  this.coordinates.length; i++){
       this.getWeather(this.coordinates[i].latitude, this.coordinates[i].longitude);
-
+     
+      
     }
     
+   
     
     
    
@@ -70,5 +73,12 @@ export class WeatherFavouritesPage implements OnInit {
      } 
 
 
+  }
+
+  removeItem(weatherLocation : any = []){
+
+    this.mds.removeItemFromArray('weatherLocation', weatherLocation.name)
+    
+    
   }
 }

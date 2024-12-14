@@ -4,19 +4,19 @@
 
 
 <ion-content [fullscreen]="true" *ngIf="weatherLocations !== null">
-  <ion-card *ngFor=" let location of weatherLocations">
+  <ion-card *ngFor=" let location of weatherLocations" >
     <img [src]="'https://openweathermap.org/img/wn/' + location.weather[0].icon + '@2x.png'" alt="Weather Icon" />
       
     
    
     <ion-card-header>
-      <ion-card-title>Weather in {{city}} is {{location.weather[0].description}} </ion-card-title>
+      <ion-card-title>Weather in {{location.name}} is {{location.weather[0].description}} </ion-card-title>
       <ion-card-subtitle>Current temperature: {{location.main.temp}}</ion-card-subtitle>
     </ion-card-header>
-    <ion-button >Remove location</ion-button>
+    <ion-button (click)="removeItem(location)" >Remove location</ion-button>
   </ion-card>
   
-  <!-- (click)="removeWeatherLocations()"-->
+  
 
   
 </ion-content>
