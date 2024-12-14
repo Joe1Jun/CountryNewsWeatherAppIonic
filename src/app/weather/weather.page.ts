@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard } from '@ionic/angular/standalone';
+import { IonContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard } from '@ionic/angular/standalone';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
 import { DataServiceService } from '../services/data-service.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { Header2Page } from '../shared/header2/header2.page';
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.page.html',
   styleUrls: ['./weather.page.scss'],
   standalone: true,
-  imports: [IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonContent, CommonModule, FormsModule, Header2Page]
 })
 export class WeatherPage implements OnInit {
   //Taken from the params

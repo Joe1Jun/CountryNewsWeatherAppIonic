@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonSpinner, IonCard, IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { Header2Page } from '../shared/header2/header2.page';
 @Component({
   selector: 'app-cities',
   templateUrl: './cities.page.html',
   styleUrls: ['./cities.page.scss'],
   standalone: true,
-  imports: [IonInput, IonCard, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,RouterLink]
+  imports: [IonInput, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,RouterLink, Header2Page]
 })
 export class CitiesPage implements OnInit {
 

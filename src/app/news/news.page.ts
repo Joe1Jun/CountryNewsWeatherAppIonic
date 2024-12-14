@@ -6,13 +6,13 @@ import { HttpOptions } from '@capacitor/core';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../services/data-service.service';
-
+import { Header2Page } from '../shared/header2/header2.page';
 @Component({
   selector: 'app-news',
   templateUrl: './news.page.html',
   styleUrls: ['./news.page.scss'],
   standalone: true,
-  imports: [ IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [ IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, Header2Page]
 })
 export class NewsPage implements OnInit {
  

@@ -1,8 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Latest news from {{country}}</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header2></app-header2>
 
 <ion-content [fullscreen]="true" *ngIf="!loading">
   <ion-card *ngFor="let newsArticle of news">

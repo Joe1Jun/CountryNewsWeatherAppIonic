@@ -5,13 +5,13 @@ import { IonContent, IonCardHeader, IonCard,  IonCardTitle,  IonButton } from '@
 import { HttpOptions } from '@capacitor/core';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { ActivatedRoute,  RouterLink } from '@angular/router';
-import { HeaderPage } from '../shared/header/header.page';
+import { Header2Page } from '../shared/header2/header2.page';
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.page.html',
   styleUrls: ['./countries.page.scss'],
   standalone: true,
-  imports: [IonButton,IonCardTitle, IonCard, IonCardHeader, IonContent,  CommonModule, FormsModule, RouterLink, HeaderPage]
+  imports: [IonButton,IonCardTitle, IonCard, IonCardHeader, IonContent,  CommonModule, FormsModule, RouterLink, Header2Page]
 })
 export class CountriesPage implements OnInit {
    

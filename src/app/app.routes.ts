@@ -43,6 +43,10 @@ export const routes: Routes = [
     path: 'cities/:country/:countryCode',
     loadComponent: () => import('./cities/cities.page').then( m => m.CitiesPage)
   },
+  {
+    path: 'header2',
+    loadComponent: () => import('./shared/header2/header2.page').then( m => m.Header2Page)
+  },
   
    
 ];
