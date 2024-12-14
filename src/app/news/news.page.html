@@ -1,14 +1,40 @@
 <app-header2></app-header2>
 
-<ion-content [fullscreen]="true" *ngIf="!loading">
-  <ion-card *ngFor="let newsArticle of news">
-    <img alt="News Picture" src="{{newsArticle.image_url}}" />
-    <ion-card-header>
-      <ion-card-title>{{newsArticle.description}}</ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-    </ion-card-header>
+<ion-content [fullscreen]="true" *ngIf="!loading" >
+
+
+
+
+  <div class="newArticles" *ngFor="let newsArticle of news">
+    <a href="{{newsArticle.link}}" target="blank" class="link">
+
+      <ion-card >
+        <img alt="News Picture" src="{{newsArticle.image_url}}" />
+        <ion-card-header>
+          <ion-card-title>{{newsArticle.description}}</ion-card-title>
+          <ion-card-subtitle>{{newsArticle.title}}</ion-card-subtitle>
+        </ion-card-header>
+      
+        
+      </ion-card>
+
+
+    </a>
+    
+  
+  
+  </div>
+    
+
+
+
+
   
     
-  </ion-card>
+
+
+
+ 
+  
  
 </ion-content>

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { DataServiceService } from '../services/data-service.service';
 import { RouterLink } from '@angular/router';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -19,10 +19,14 @@ export class SettingsPage implements OnInit {
   selectedScientific: boolean = false;
   value : string = "temperatureType"
 
-  constructor(private mds : DataServiceService) { }
+  constructor(private mds : DataServiceService, private pageLocation : Location) { }
 
   ngOnInit() {
     
+  }
+
+  goBack() {
+    this.pageLocation.back();
   }
 
   saveSelection() {
