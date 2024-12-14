@@ -25,7 +25,7 @@ export class WeatherPage implements OnInit {
 // This variable hold the url to the API that returns the weather data
   units! : string 
  latitude! : number;
- longtitude! : number;
+ longitude! : number;
 
  
 apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
@@ -38,10 +38,10 @@ apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
     this.route.paramMap.subscribe((params) =>{
       this.city = params.get('city') || '';
       this.latitude = parseFloat(params.get('lat')!);
-      this.longtitude = parseFloat(params.get('long')!);
+      this.longitude = parseFloat(params.get('long')!);
 
       console.log('Latitude:', this.latitude); 
-      console.log('Longitude:', this.longtitude); 
+      console.log('Longitude:', this.longitude); 
       
      })
 
@@ -102,8 +102,16 @@ async getTempType(){
   }
 
   saveWeatherLocations(){
-    // this will save the weather object to storage 
-    this.mds.saveWeatherLocation('weatherLocations', this.weather)
+    //Should just save the parameters needed to make the API call from the favourites page
+    // So just need longitude and latitude
+    
+    // This object holds the values to be saved to storage
+    const location = {
+      latiude :this.latitude,
+      longitude : this.longitude
+    }
+
+    this.mds.saveWeatherLocation('weatherLocations', location )
     
   }
 
