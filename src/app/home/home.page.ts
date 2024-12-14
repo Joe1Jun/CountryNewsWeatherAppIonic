@@ -3,6 +3,7 @@ import { IonContent, IonInput, IonButton } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HeaderPage } from '../shared/header/header.page';
+import { DataServiceService } from '../services/data-service.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -13,4 +14,7 @@ import { HeaderPage } from '../shared/header/header.page';
 export class HomePage {
   searchTerm! : string
   constructor() {}
+
+
+  
 }

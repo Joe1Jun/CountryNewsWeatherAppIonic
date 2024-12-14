@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButton } from '@ionic/angular/standalone';
 import { MyHttpServiceService } from '../services/my-http-service.service';
@@ -102,7 +102,8 @@ async getTempType(){
   }
 
   saveWeatherLocations(){
-    this.mds.setItem()
+    // this will save the weather object to storage 
+    this.mds.saveWeatherLocation('weatherLocations', this.weather)
     
   }
 

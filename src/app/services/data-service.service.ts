@@ -8,6 +8,8 @@ export class DataServiceService {
   //This stoage variable is used to store the initialized instance of storage after calling the create method
  private _storage! :Storage 
 
+ 
+
   constructor(private storage : Storage ) { 
     //cannot use this method in the constructor as it is an async method
     this.init();
@@ -37,19 +39,30 @@ export class DataServiceService {
     await this.storage.remove(key);
   }
 
-  async saveItemToArray (key : string, item : any){
-     
-    
-
+  async saveWeatherLocation(key: string, location: any) {
+    //  Retrieve the current weather locations array
+    const weatherArray = await this.getArray(key);
+    console.log( weatherArray);
+  
+    //  Add the new location data
+    weatherArray.push(location);
+  
+    //  Save the updated array back to storage
+    await this.storage.set(key, JSON.stringify(weatherArray));
+    console.log('Weather location saved');
   }
-
-
-  async getArray (key : string ) : Promise<string>{
-    
-
-    return " "
+  
+  async getArray(key: string): Promise<any[]> {
+    //  Retrieve the array from storage or return an empty array if not found
+    const data = await this.storage.get(key);
+    if(data){
+      return JSON.parse(data)
+    }else{
+       return  []
+    }
+    ;
   }
-
+  
   async removeItemFromArray(){
 
 
