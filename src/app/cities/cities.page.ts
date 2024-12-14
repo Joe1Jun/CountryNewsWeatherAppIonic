@@ -51,8 +51,8 @@ export class CitiesPage implements OnInit {
 
      const response = await this.mhs.get(options);
      console.log(response.data);
-     this.latitude = response.data.lat
-     this.longitude = response.data.long;
+     this.latitude = response.data[0].lat
+     this.longitude = response.data[0].lon;
      console.log(this.latitude)
      console.log(this.longitude);     
      }
