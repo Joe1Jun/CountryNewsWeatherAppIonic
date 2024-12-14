@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonInput } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
@@ -13,7 +13,7 @@ import { Header2Page } from '../shared/header2/header2.page';
   templateUrl: './cities.page.html',
   styleUrls: ['./cities.page.scss'],
   standalone: true,
-  imports: [IonInput, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,RouterLink, Header2Page]
+  imports: [IonInput, IonButton, IonContent, CommonModule, FormsModule,RouterLink, Header2Page]
 })
 export class CitiesPage implements OnInit {
 
