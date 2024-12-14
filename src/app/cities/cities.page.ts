@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonSpinner, IonCard } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonSpinner, IonCard, IonInput } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './cities.page.html',
   styleUrls: ['./cities.page.scss'],
   standalone: true,
-  imports: [IonCard, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,RouterLink]
+  imports: [IonInput, IonCard, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,RouterLink]
 })
 export class CitiesPage implements OnInit {
 
@@ -20,8 +20,11 @@ export class CitiesPage implements OnInit {
   cities! : any [];
   countryCode! : string ;
   cityLimit : number = 5;
-  
-
+  userLocationInput! : string;
+  //This will hold the value of the lat and long values of the user input city returned from the api call 
+  latitude! : number;
+  logitude! : number;
+  apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
  
   constructor(private route : ActivatedRoute, private mhs : MyHttpServiceService) { }
 
@@ -35,6 +38,25 @@ export class CitiesPage implements OnInit {
     })
   this.getCities();
     
+  }
+// This method is called when the user clicks the button to submit the data
+  async getUserInputLocationCoordinates(){
+    //checks if the user has inputted any data
+     if(this.userLocationInput){
+      //This route transforms to the open weather API 
+     let options : HttpOptions = {
+        url : `http://api.openweathermap.org/geo/1.0/direct?q=${this.userLocationInput},${this.countryCode}&appid=${this.apiKey}`
+
+     }
+
+     const response = await this.mhs.get(options);
+     console.log(response.data);
+     this.latitude = response.data.latitude
+     this.logitude = response.data.logitude;
+     console.log(this.latitude)
+     console.log(this.logitude);     
+     }
+
   }
 
   

@@ -12,6 +12,8 @@
   <ion-button [routerLink]="['/weather', city.name, city.latitude, city.longitude]">Weather for {{city.name}}</ion-button>
 </div>
 
+<ion-input placeholder="Input your location" [(ngModel)]="userLocationInput"></ion-input>
+<ion-button (click)="getUserInputLocationCoordinates()">Search your inputted location</ion-button>
  
     
   
