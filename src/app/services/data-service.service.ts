@@ -22,6 +22,7 @@ export class DataServiceService {
   }
 
   //This method will set the item in storage as a key value pair
+  //This will be used for settings that have one key value pir
   async setItem(key : string, value:any){
     await this._storage.set(key, value);
     console.log(value + ' set successfully!');
@@ -35,4 +36,27 @@ export class DataServiceService {
   async removeItem(key:string){
     await this.storage.remove(key);
   }
+
+  async saveItemToArray (key : string, item : any){
+     
+    
+
+  }
+
+
+  async getArray (key : string ) : Promise<string>{
+    
+
+    return " "
+  }
+
+  async removeItemFromArray(){
+
+
+  }
+
+
+
+
+  
 }

@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard } from '@ionic/angular/standalone';
+import { IonContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButton } from '@ionic/angular/standalone';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
 import { DataServiceService } from '../services/data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Header2Page } from '../shared/header2/header2.page';
+
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.page.html',
   styleUrls: ['./weather.page.scss'],
   standalone: true,
-  imports: [IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonContent, CommonModule, FormsModule, Header2Page]
+  imports: [IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonContent, CommonModule, FormsModule, Header2Page]
 })
 export class WeatherPage implements OnInit {
   //Taken from the params
@@ -39,14 +40,14 @@ apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
       this.latitude = parseFloat(params.get('lat')!);
       this.longtitude = parseFloat(params.get('long')!);
 
-      console.log('Latitude:', this.latitude); // Logs 38.89
-      console.log('Longitude:', this.longtitude); // Logs -77.05
+      console.log('Latitude:', this.latitude); 
+      console.log('Longitude:', this.longtitude); 
       
      })
 
     
     
-    // Had to chain these otherwise 
+    
    
     
     this.setUpTemperature();
@@ -98,6 +99,11 @@ async getTempType(){
      } 
 
 
+  }
+
+  saveWeatherLocations(){
+    this.mds.setItem()
+    
   }
 
 }
