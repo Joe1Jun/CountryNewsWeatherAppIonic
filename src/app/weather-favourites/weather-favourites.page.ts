@@ -75,9 +75,10 @@ export class WeatherFavouritesPage implements OnInit {
 
   }
 
-  removeItem(weatherLocation : any = []){
+  removeItem(locationId: number){
 
-    this.mds.removeItemFromArray('weatherLocation', weatherLocation.name)
+
+    this.mds.removeItemFromArray('weatherLocation', locationId)
     
     
   }

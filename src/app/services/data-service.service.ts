@@ -58,15 +58,15 @@ export class DataServiceService {
     return data ? JSON.parse(data) : [];
   }
   
-  async removeItemFromArray(key : string, name : string){
+  async removeItemFromArray(key : string , id : number){
 
     const removeArray = await this.getArray(key);
 
     for (let i = 0; i < removeArray.length; i++) {
-      if (removeArray[i].name === name) {
+      if (removeArray[i].id === id) {
         //  Remove the item using splice if it matches
         removeArray.splice(i, 1); // Removes the item at index i
-        console.log(`${name} removed from the array.`);
+        console.log(` removed from the array.`);
         // S Save the updated array back to storage
         await this.storage.set(key, JSON.stringify(removeArray));
         // Exit after removing the item
