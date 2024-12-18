@@ -87,16 +87,23 @@ export class WeatherFavouritesPage implements OnInit {
 
   }
 
-  removeItem(id : number){
+   async removeItem(id : number){
 
     console.log(id)
-    this.mds.removeItemFromArray('weatherLocations', id)
-
-    // Save the updated array back to storage
-    
-    
-
    
-    
+    try {
+      // Remove the item from storage
+      await this.mds.removeItemFromArray('weatherLocations', id);
+  
+       // Clear the existing weather locations array
+       this.weatherLocations = [];
+
+      // Fetch the updated weather data
+      await this.ionViewWillEnter();
+    } catch (error) {
+      console.log("Error removing item or updating weather locations", error);
+    }
   }
+    
+  
 }
