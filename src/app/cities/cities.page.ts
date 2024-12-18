@@ -101,6 +101,7 @@ async getUserInputLocationCoordinates(){
     this.storedWeatherLocations= response;
     if(!this.storedWeatherLocations || this.storedWeatherLocations.length === 0){
       this.getCities();
+      
     }else{
 
       for(let i = 0 ;i <  this.storedWeatherLocations.length; i++){
@@ -140,7 +141,7 @@ try {
    const response = await this.mhs.get(options);
     console.log(response.data.data);
     this.cities = response.data.data
-   
+    
    
     for(let i = 0 ; i < this.cities.length; i++){
       
@@ -174,8 +175,14 @@ try {
       if(location.name.toLowerCase() !== name ){
         location.name = name;
       }
+
      this.weatherLocations.push(location)
+     for( let i = 0 ; i < this.weatherLocations.length; i++){
+          this.saveWeatherLocations(this.weatherLocations[i].id, this.weatherLocations[i].name)
+     }
+
      
+
      console.log(this.weatherLocations)
 
 
@@ -239,17 +246,24 @@ async getWeather(id:  number, name : string){
     
   }
 
-  removeItemsFromArray (id : number){
-       
-    for(let i = 0 ; i < this.weatherLocations.length; i++){
+  async removeItem(id : number){
 
-      if(id === this.weatherLocations[i].id){
-        this.weatherLocations.splice(this.weatherLocations[i])
-      }
+    console.log(id)
+   
+    try {
+      // Remove the item from storage
+      await this.mds.removeItemFromArray('weatherLocations', id);
+  
+       // Clear the existing weather locations array
+       this.weatherLocations = [];
+
+      // Fetch the updated weather data
+      await this.ionViewWillEnter();
+    } catch (error) {
+      console.log("Error removing item or updating weather locations", error);
     }
-    this.ionViewWillEnter();
-
   }
+    
 
 
 
