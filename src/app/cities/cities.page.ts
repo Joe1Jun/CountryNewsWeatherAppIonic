@@ -17,14 +17,14 @@ import { DataServiceService } from '../services/data-service.service';
   imports: [IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonInput, IonButton, IonContent, CommonModule, FormsModule,RouterLink, Header2Page]
 })
 export class CitiesPage implements OnInit {
-
+  
+  capital! : string;
   country! : string;
   cities! : any [];
   weatherLocations : any[] = [];
   countryCode! : string ;
   cityLimit : number = 3;
   userLocationInput! : string;
-  
   units! : string;
   
 
@@ -38,7 +38,7 @@ export class CitiesPage implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.country = params.get('country') || ''
       this.countryCode = params.get('countryCode') || ' '
-
+      this.capital = params.get('capital') || ''
 
     })
   
@@ -52,6 +52,7 @@ export class CitiesPage implements OnInit {
 
     setUpTemperature(){
       this.getTempType().then(() => {
+       
         this.getCities()
     
     
@@ -92,6 +93,8 @@ async getUserInputLocationCoordinates(){
 
   }
 
+
+  
   
 
 
@@ -114,7 +117,9 @@ try {
     console.log(response.data.data);
    this.cities = response.data.data
 
+   
    for(let i = 0 ; i < this.cities.length; i++){
+      
       this.getWeatherLocations( this.cities[i].latitude , this.cities[i].longitude)   
 
    }
@@ -139,7 +144,11 @@ try {
 
    const response =  await this.mhs.get(options);
     let location = response.data
+    if(location.name.toLowerCase() !== this.capital ){
+      location.name = this.capital;
+    }
    this.weatherLocations.push(location)
+   
    console.log(this.weatherLocations)
   }  
 

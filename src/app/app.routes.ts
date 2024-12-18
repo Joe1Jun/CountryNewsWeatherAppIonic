@@ -40,7 +40,7 @@ export const routes: Routes = [
     loadComponent: () => import('./shared/footer/footer.page').then( m => m.FooterPage)
   },
   {
-    path: 'cities/:country/:countryCode',
+    path: 'cities/:country/:countryCode/:capital',
     loadComponent: () => import('./cities/cities.page').then( m => m.CitiesPage)
   },
   {
