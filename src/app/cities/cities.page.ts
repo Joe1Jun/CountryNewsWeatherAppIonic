@@ -20,7 +20,7 @@ export class CitiesPage implements OnInit {
 
   country! : string;
   cities! : any [];
-  weatherLocations! : any[];
+  weatherLocations : any[] = [];
   countryCode! : string ;
   cityLimit : number = 3;
   userLocationInput! : string;
@@ -111,7 +111,7 @@ async getUserInputLocationCoordinates(){
 try {
 
    const response = await this.mhs.get(options);
-    console.log(response.data);
+    console.log(response.data.data);
    this.cities = response.data.data
 
    for(let i = 0 ; i < this.cities.length; i++){
@@ -130,12 +130,14 @@ try {
     }
 
  async getWeatherLocations(lat : number, long : number){
-     
+    console.log(lat, long)
+
+
  let  options : HttpOptions = {
     url : `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=${this.units}&appid=${this.apiKey}`
   }
 
-   let location = this.mhs.get(options);
+   let location =  await this.mhs.get(options);
 
    this.weatherLocations.push(location)
    console.log(this.weatherLocations)
