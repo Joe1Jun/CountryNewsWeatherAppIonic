@@ -20,7 +20,7 @@ export class CitiesPage implements OnInit {
   country! : string;
   cities! : any [];
   countryCode! : string ;
-  cityLimit : number = 5;
+  cityLimit : number = 3;
   userLocationInput! : string;
   //This will hold the value of the lat and long values of the user input city returned from the api call 
   latitude! : number;
@@ -41,7 +41,9 @@ export class CitiesPage implements OnInit {
     
   }
 // This method is called when the user clicks the button to submit the data
-  async getUserInputLocationCoordinates(){
+  
+
+async getUserInputLocationCoordinates(){
     //checks if the user has inputted any data
      if(this.userLocationInput){
       //This route transforms to the open weather API 
@@ -93,7 +95,6 @@ try {
 
    const response = await this.mhs.get(options);
     console.log(response.data);
-   
    this.cities = response.data.data
   
 

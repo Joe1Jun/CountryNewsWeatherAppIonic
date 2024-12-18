@@ -17,15 +17,15 @@ export class WeatherFavouritesPage implements OnInit {
 
   weatherLocations : any = []
   // tHIS VARIABLES
-  coordinates : any  = [];
-  
+  storedWeatherLocations : any  = [];
+ 
   units! : string 
  
  apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
   constructor(private mds :DataServiceService, private mhs : MyHttpServiceService) { }
 
   ngOnInit() {
-
+     
    
   }
 
@@ -41,13 +41,13 @@ export class WeatherFavouritesPage implements OnInit {
 
 
   async getFavouriteWeatherLocations(){
-     
+    
     const response = await  this.mds.getArray('weatherLocations')
     console.log(response);
-    this.coordinates = response;
+    this.storedWeatherLocations= response;
 
-    for(let i = 0 ;i <  this.coordinates.length; i++){
-      this.getWeather(this.coordinates[i].latitude, this.coordinates[i].longitude);
+    for(let i = 0 ;i <  this.storedWeatherLocations.length; i++){
+      this.getWeather(this.storedWeatherLocations[i].id);
      
       
     }
@@ -59,12 +59,14 @@ export class WeatherFavouritesPage implements OnInit {
   }
 
 
-  async getWeather(latitude : number, longitude : number){
+  async getWeather(id:  number){
      
     
     
     let options : HttpOptions = {
-     url : `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${this.units}&appid=${this.apiKey}`
+     //url : `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${this.units}&appid=${this.apiKey}`
+     url : `https://api.openweathermap.org/data/2.5/weather?id=${id}&appid=${this.apiKey}`
+
     }
    
    // Surround the API request in a try catch in case of errors.   
@@ -89,6 +91,11 @@ export class WeatherFavouritesPage implements OnInit {
 
     console.log(id)
     this.mds.removeItemFromArray('weatherLocations', id)
+
+    // Save the updated array back to storage
+    
+    
+
    
     
   }

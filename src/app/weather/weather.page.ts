@@ -110,8 +110,6 @@ async getTempType(){
     
     // This object holds the values to be saved to storage
     const location = {
-      latitude :this.latitude,
-      longitude : this.longitude,
       id : this.id
     }
 
