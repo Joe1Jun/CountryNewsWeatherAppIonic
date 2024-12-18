@@ -22,7 +22,7 @@ ion-content [fullscreen]="true" *ngIf="cities && cities.length > 0" >
  <ion-content [fullscreen]="true" *ngIf="weatherLocations !== null">
 
   <ion-input placeholder="Input your location" [(ngModel)]="userLocationInput"></ion-input>
-  <ion-button (click)="getUserInputLocationCoordinates()">Weather for {{userLocationInput}}</ion-button>
+  <ion-button (click)="getUserInputLocationCoordinates()">Search</ion-button>
   
   <ion-card *ngFor=" let location of weatherLocations" >
     <img  [src]="'https://openweathermap.org/img/wn/' + location.weather[0].icon + '@2x.png'" alt="Weather Icon" />
