@@ -137,8 +137,8 @@ try {
     url : `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=${this.units}&appid=${this.apiKey}`
   }
 
-   let location =  await this.mhs.get(options);
-
+   const response =  await this.mhs.get(options);
+    let location = response.data
    this.weatherLocations.push(location)
    console.log(this.weatherLocations)
   }  
