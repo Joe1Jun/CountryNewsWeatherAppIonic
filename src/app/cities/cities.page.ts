@@ -77,7 +77,7 @@ async getUserInputLocationCoordinates(){
     const response = await this.mhs.get(options);
     console.log(response.data);
      
-    this.getWeatherLocations(response.data[0].lat, response.data[0].lon) 
+    this.getWeatherLocations(response.data[0].lat, response.data[0].lon, this.userLocationInput) 
     console.log(response.data[0].lat)
     console.log(response.data[0].lon); 
     
@@ -120,8 +120,8 @@ try {
    
    for(let i = 0 ; i < this.cities.length; i++){
       
-      this.getWeatherLocations( this.cities[i].latitude , this.cities[i].longitude)   
-
+      this.getWeatherLocations( this.cities[i].latitude , this.cities[i].longitude, this.cities[i].name)   
+      
    }
   
 
@@ -134,7 +134,7 @@ try {
   
     }
 
- async getWeatherLocations(lat : number, long : number){
+ async getWeatherLocations(lat : number, long : number, name : string){
     console.log(lat, long)
 
 
@@ -144,8 +144,8 @@ try {
 
    const response =  await this.mhs.get(options);
     let location = response.data
-    if(location.name.toLowerCase() !== this.capital ){
-      location.name = this.capital;
+    if(location.name.toLowerCase() !== name ){
+      location.name = name;
     }
    this.weatherLocations.push(location)
    
