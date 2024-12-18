@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonButton, IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonInput, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
@@ -13,18 +13,23 @@ import { Header2Page } from '../shared/header2/header2.page';
   templateUrl: './cities.page.html',
   styleUrls: ['./cities.page.scss'],
   standalone: true,
-  imports: [IonInput, IonButton, IonContent, CommonModule, FormsModule,RouterLink, Header2Page]
+  imports: [IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonInput, IonButton, IonContent, CommonModule, FormsModule,RouterLink, Header2Page]
 })
 export class CitiesPage implements OnInit {
 
   country! : string;
   cities! : any [];
+  weatherLocations! : any[];
   countryCode! : string ;
   cityLimit : number = 3;
   userLocationInput! : string;
   //This will hold the value of the lat and long values of the user input city returned from the api call 
   latitude! : number;
   longitude! : number;
+  units! : string;
+  
+
+
   apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
  
   constructor(private route : ActivatedRoute, private router : Router, private mhs : MyHttpServiceService) { }
@@ -42,6 +47,9 @@ export class CitiesPage implements OnInit {
   }
 // This method is called when the user clicks the button to submit the data
   
+ionViewWillEnter(){
+   this.getWeatherLocations();
+}
 
 async getUserInputLocationCoordinates(){
     //checks if the user has inputted any data
@@ -96,6 +104,11 @@ try {
    const response = await this.mhs.get(options);
     console.log(response.data);
    this.cities = response.data.data
+
+   for(let i = 0 ; i < this.cities.length; i++){
+         
+
+   }
   
 
   
@@ -105,9 +118,15 @@ try {
   
 }
   
-    
+    }
 
-   }
+ async getWeatherLocations(lat : number, long : number){
+     
+ let  options : HttOptions = {
+    url : `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=${this.units}&appid=${this.apiKey}`
+  }
+
+  }  
 
 
 
