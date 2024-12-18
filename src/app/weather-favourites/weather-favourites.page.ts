@@ -75,10 +75,10 @@ export class WeatherFavouritesPage implements OnInit {
 
   }
 
-  removeItem(locationId: number){
+  removeItem(locationLat : number){
 
 
-    this.mds.removeItemFromArray('weatherLocation', locationId)
+    this.mds.removeItemFromArray('weatherLocations', locationLat )
     
     
   }

@@ -31,12 +31,12 @@ export class DataServiceService {
   }
 //This item will retrieve the item from storage.
   async getItem(key : string) : Promise<string> {
-    return await this.storage.get(key);
+    return await this._storage.get(key);
     
   }
 
   async removeItem(key:string){
-    await this.storage.remove(key);
+    await this._storage.remove(key);
   }
 
   async saveWeatherLocation(key: string, location: any) {
@@ -48,34 +48,52 @@ export class DataServiceService {
     weatherArray.push(location);
   
     //  Save the updated array back to storage
-    await this.storage.set(key, JSON.stringify(weatherArray));
+    await this._storage.set(key, JSON.stringify(weatherArray));
     console.log('Weather location saved');
   }
   
   async getArray(key: string): Promise<any[]> {
     //  Retrieve the array from storage or return an empty array if not found
-    const data = await this.storage.get(key);
+    const data = await this._storage.get(key);
+   
     return data ? JSON.parse(data) : [];
   }
   
-  async removeItemFromArray(key : string , id : number){
+  async removeItemFromArray(key : string , name : number){
 
-    const removeArray = await this.getArray(key);
-
-    for (let i = 0; i < removeArray.length; i++) {
-      if (removeArray[i].id === id) {
-        //  Remove the item using splice if it matches
-        removeArray.splice(i, 1); // Removes the item at index i
-        console.log(` removed from the array.`);
-        // S Save the updated array back to storage
-        await this.storage.set(key, JSON.stringify(removeArray));
-        // Exit after removing the item
-        console.log(this.getArray(key))
-        return; 
+    try {
+      
+      const removeArray = await this.getArray(key);
+      console.log("This is th array before item removed " , removeArray);
+      for (let i = 0; i < removeArray.length; i++) {
+        if (removeArray[i].name === name) {
+          //  Remove the item using splice if it matches
+          removeArray.splice(i, 1); // Removes the item at index i
+          console.log("removed from the array");
+          // S Save the updated array back to storage
+          await this._storage.set(key, JSON.stringify(removeArray));
+          // Exit after removing the item
+          console.log(this.getArray(key))
+         
+        }else{
+          console.log("Items not found")
+        }
+    
+    
       }
+    
+    
+    } catch (error) {
+      
+     console.log("Error deleting item", error)
+
+
+
+    }
+
+   
     
 
   }
 
   }
-}
