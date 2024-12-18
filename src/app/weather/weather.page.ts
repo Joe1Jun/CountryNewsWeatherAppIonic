@@ -49,12 +49,12 @@ export class WeatherPage implements OnInit {
 // This method is called when the user clicks the button to submit the data
   ionViewWillEnter(){
     this.setUpTemperature();
-    this.getCapitalWeather()
+    
     }
 
     setUpTemperature(){
       this.getTempType().then(() => {
-       
+        this.getCapitalWeather()
         this.getFavouriteWeatherLocations();
     
     
@@ -116,7 +116,7 @@ async getUserInputLocationCoordinates(){
   async getFavouriteWeatherLocations(){
     
     
-    const response = await  this.mds.getArray('weatherLocations')
+    const response = await  this.mds.getArray("weather" + this.countryCode)
     console.log(response);
     this.storedWeatherLocations= response;
    
@@ -236,11 +236,11 @@ async getWeather(id:  number, name : string){
    
     try {
       // Remove the item from storage
-      await this.mds.removeItemFromArray('weatherLocations', id);
+      await this.mds.removeItemFromArray("weather" + this.countryCode, id);
   
        // Clear the existing weather locations array
        this.weatherLocations = [];
-       console.log("Storage array : " + this.mds.getArray('weatherLocations'))
+       console.log("Storage array : " + this.mds.getArray("weather" + this.countryCode))
       // Fetch the updated weather data
       await this.ionViewWillEnter();
     } catch (error) {

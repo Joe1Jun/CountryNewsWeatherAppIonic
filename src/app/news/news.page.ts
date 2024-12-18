@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard } from '@ionic/angular/standalone';
+import { IonContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButton } from '@ionic/angular/standalone';
 import { HttpOptions } from '@capacitor/core';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import { Header2Page } from '../shared/header2/header2.page';
   templateUrl: './news.page.html',
   styleUrls: ['./news.page.scss'],
   standalone: true,
-  imports: [ IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonContent, CommonModule, FormsModule, Header2Page]
+  imports: [IonButton,  IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonContent, CommonModule, FormsModule, Header2Page]
 })
 export class NewsPage implements OnInit {
  
@@ -20,7 +20,7 @@ export class NewsPage implements OnInit {
  country! :string;
  countryCode! : string; 
  news : any [] = [];
- tempType! : string ;
+ 
  // The news Url with the API key. Should add ENV file for this key later
  
  
@@ -28,7 +28,7 @@ export class NewsPage implements OnInit {
 constructor(private mhs : MyHttpServiceService, private mds : DataServiceService, private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.getTempType();
+    
 
     
 
@@ -49,12 +49,7 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
 
   }
 
-  async getTempType(){
-    const tempType = await this.mds.getItem('temperatureType');
-    this.tempType = tempType;
-    console.log(this.tempType)
- }
-
+  
   //This asynchronous function will call the get function from the myHttpService
   async getNews(){
     this.loading = true;
@@ -83,6 +78,17 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
 
   }
   
+
+  saveItem(id : string){
+    
+    const newsArticle= {
+      id : id,
+      
+    }
+
+    this.mds.saveItemToArray("news" + this.countryCode, newsArticle)
+    
+  }
 
 
   
