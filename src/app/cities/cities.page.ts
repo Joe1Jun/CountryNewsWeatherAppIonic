@@ -19,6 +19,8 @@ import { DataServiceService } from '../services/data-service.service';
 export class CitiesPage implements OnInit {
   
   capital! : string;
+  capitalWeather: any = null // Declares it as an object instead of an array
+
   country! : string;
   cities! : any [];
   weatherLocations : any[] = [];
@@ -47,7 +49,7 @@ export class CitiesPage implements OnInit {
 // This method is called when the user clicks the button to submit the data
   ionViewWillEnter(){
     this.setUpTemperature();
-
+    this.getCapitalWeather()
     }
 
     setUpTemperature(){
@@ -75,6 +77,7 @@ async getUserInputLocationCoordinates(){
   try {
 
     const response = await this.mhs.get(options);
+    
     console.log(response.data);
      
     this.getWeatherLocations(response.data[0].lat, response.data[0].lon, this.userLocationInput) 
@@ -93,23 +96,38 @@ async getUserInputLocationCoordinates(){
 
   }
 
+  async getCapitalWeather() {
+    try {
+      const options: HttpOptions = {
+        url: `https://api.openweathermap.org/data/2.5/weather?q=${this.capital}&units=${this.units}&appid=${this.apiKey}`,
+      };
+  
+      const response = await this.mhs.get(options);
+      this.capitalWeather = response.data; // Store the capital's weather data
+      console.log(this.capitalWeather);
+     
+    } catch (error) {
+      console.log("Error fetching capital weather data:", error);
+    }
+  }
+
+  
 
   async getFavouriteWeatherLocations(){
+    
     
     const response = await  this.mds.getArray('weatherLocations')
     console.log(response);
     this.storedWeatherLocations= response;
-    if(!this.storedWeatherLocations || this.storedWeatherLocations.length === 0){
-      this.getCities();
-      
-    }else{
+   
+    
 
-      for(let i = 0 ;i <  this.storedWeatherLocations.length; i++){
+      for(let i = 1 ;i <  this.storedWeatherLocations.length; i++){
 
         this.getWeather(this.storedWeatherLocations[i].id, this.storedWeatherLocations[i].name);
          
 
-    }
+    
 
    
       
@@ -123,41 +141,7 @@ async getUserInputLocationCoordinates(){
   
 
 
-  async getCities(){
-     
-    let options : HttpOptions = {
-      
-      url: `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=${this.countryCode}&sort=-population&limit=${this.cityLimit}&types=CITY`,
-     
-     headers : {
-      'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
-      'x-rapidapi-key': 'fa92f03d5amshb8d1244b10adbbbp102952jsn540534327d75'
-
-     }
-
-    }
-try {
-
-   const response = await this.mhs.get(options);
-    console.log(response.data.data);
-    this.cities = response.data.data
-    
-   
-    for(let i = 0 ; i < this.cities.length; i++){
-      
-      this.getWeatherLocations( this.cities[i].latitude , this.cities[i].longitude, this.cities[i].name)   
-      
-   }
   
-
-  
-} catch (error) {
-
-  console.log("Error retrieving data" , error)
-  
-}
-  
-    }
 
  async getWeatherLocations(lat : number, long : number, name : string){
     console.log(lat, long)

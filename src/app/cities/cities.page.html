@@ -1,30 +1,27 @@
 <app-header2></app-header2>
 
-<!--
 
-
-
-ion-content [fullscreen]="true" *ngIf="cities && cities.length > 0" >
-
- <div class="cities" *ngFor="let city of cities">
- Passing the latitude and longitude to the weather page
-<ion-button [routerLink]="['/weather', city.name, city.latitude, city.longitude]">Weather for {{city.name}}</ion-button>
-</div>
-
-<ion-input placeholder="Input your location" [(ngModel)]="userLocationInput"></ion-input>
-<ion-button (click)="getUserInputLocationCoordinates()">Weather for {{userLocationInput}}</ion-button>
-</ion-content>
- The content will only render if the array is populate.This means it will wait until the data is returned-->
 
     
- 
-
- <ion-content [fullscreen]="true" *ngIf="weatherLocations !== null">
+<ion-content [fullscreen]="true" >
 
   <ion-input placeholder="Input your location" [(ngModel)]="userLocationInput"></ion-input>
   <ion-button (click)="getUserInputLocationCoordinates()">Search</ion-button>
 
-  
+  <ion-card *ngIf="capitalWeather !== null">
+    <img  [src]="'https://openweathermap.org/img/wn/' + capitalWeather.weather[0].icon + '@2x.png'" alt="Weather Icon" />
+      
+    
+   
+    <ion-card-header>
+      <ion-card-title>Weather in {{capitalWeather.name}} is {{capitalWeather.weather[0].description}} </ion-card-title>
+      <ion-card-subtitle>Current temperature: {{capitalWeather.main.temp}}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+   
+  <div class="savedLocations"*ngIf="weatherLocations !== null">
+
+ 
   
   <ion-card *ngFor=" let location of weatherLocations" >
     <img  [src]="'https://openweathermap.org/img/wn/' + location.weather[0].icon + '@2x.png'" alt="Weather Icon" />
@@ -35,9 +32,13 @@ ion-content [fullscreen]="true" *ngIf="cities && cities.length > 0" >
       <ion-card-title>Weather in {{location.name}} is {{location.weather[0].description}} </ion-card-title>
       <ion-card-subtitle>Current temperature: {{location.main.temp}}</ion-card-subtitle>
     </ion-card-header>
-    <ion-button (click)="saveWeatherLocations(location.id, location.name)">Save Location</ion-button>
+   
     <ion-button (click)="removeItem(location.id)" >Remove location</ion-button>
   </ion-card>
+
+
+  </div>
+  
   
   
 
@@ -46,3 +47,7 @@ ion-content [fullscreen]="true" *ngIf="cities && cities.length > 0" >
 
 
 
+<!--
+
+
+-->
