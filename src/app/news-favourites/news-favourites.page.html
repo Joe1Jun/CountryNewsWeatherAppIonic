@@ -1,11 +1,11 @@
 <app-header2></app-header2>
 
-<ion-content [fullscreen]="true" *ngIf="!loading" >
+<ion-content [fullscreen]="true" *ngIf="newsArticles !== null" >
 
 
 
 
-  <div class="newArticles" *ngFor="let newsArticle of news">
+  <div class="newArticles" *ngFor="let newsArticle of newsArticles">
     <a href="{{newsArticle.link}}" target="blank" class="link">
 
       <ion-card >
@@ -20,7 +20,7 @@
       
 
     </a>
-    <ion-button (click)="saveItem(newsArticle)" >Save Article </ion-button>
+   
   
   
   </div>

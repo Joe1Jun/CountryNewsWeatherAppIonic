@@ -44,6 +44,10 @@ export const routes: Routes = [
     path: 'header2',
     loadComponent: () => import('./shared/header2/header2.page').then( m => m.Header2Page)
   },
+  {
+    path: 'news-favourites',
+    loadComponent: () => import('./news-favourites/news-favourites.page').then( m => m.NewsFavouritesPage)
+  },
   
   
    

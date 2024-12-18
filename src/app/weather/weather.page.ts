@@ -54,7 +54,7 @@ export class WeatherPage implements OnInit {
 
     setUpTemperature(){
       this.getTempType().then(() => {
-        this.getCapitalWeather()
+        
         this.getFavouriteWeatherLocations();
     
     

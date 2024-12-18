@@ -79,10 +79,11 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
   }
   
 
-  saveItem(id : string){
+  saveItem(newsArticle : any){
     
-    const newsArticle= {
-      id : id,
+    console.log(newsArticle)
+    const newsItem= {
+      newsArticle : newsArticle
       
     }
 
