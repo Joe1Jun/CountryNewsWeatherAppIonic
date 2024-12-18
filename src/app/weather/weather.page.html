@@ -2,22 +2,49 @@
 
 
 
+    
+<ion-content [fullscreen]="true" >
 
-<ion-content [fullscreen]="true">
-  <ion-card *ngIf="weather?.weather?.[0] ">
-    <img [src]="'https://openweathermap.org/img/wn/' + weather.weather[0].icon + '@2x.png'" alt="Weather Icon" />
+  <ion-input placeholder="Input your location" [(ngModel)]="userLocationInput"></ion-input>
+  <ion-button (click)="getUserInputLocationCoordinates()">Search</ion-button>
+
+  <ion-card *ngIf="capitalWeather !== null">
+    <ion-card-title>Capital </ion-card-title>
+    <img  [src]="'https://openweathermap.org/img/wn/' + capitalWeather.weather[0].icon + '@2x.png'" alt="Weather Icon" />
       
     
    
     <ion-card-header>
-      <ion-card-title>Weather in {{city}} is {{weather.weather[0].description}} </ion-card-title>
-      <ion-card-subtitle>Current temperature: {{weather.main.temp}}</ion-card-subtitle>
+      <ion-card-title>Weather in {{capitalWeather.name}} is {{capitalWeather.weather[0].description}} </ion-card-title>
+      <ion-card-subtitle>Current temperature: {{capitalWeather.main.temp}}</ion-card-subtitle>
     </ion-card-header>
-    <ion-button (click)="saveWeatherLocations()">Save Location</ion-button>
   </ion-card>
+   
+  <div class="savedLocations"*ngIf="weatherLocations !== null">
+
+ 
+  
+  <ion-card *ngFor=" let location of weatherLocations" >
+    <img  [src]="'https://openweathermap.org/img/wn/' + location.weather[0].icon + '@2x.png'" alt="Weather Icon" />
+      
+    
+   
+    <ion-card-header>
+      <ion-card-title>Weather in {{location.name}} is {{location.weather[0].description}} </ion-card-title>
+      <ion-card-subtitle>Current temperature: {{location.main.temp}}</ion-card-subtitle>
+    </ion-card-header>
+   
+    <ion-button (click)="removeItem(location.id)" >Remove location</ion-button>
+  </ion-card>
+
+
+  </div>
+  
   
   
 
   
 </ion-content>
+
+
 

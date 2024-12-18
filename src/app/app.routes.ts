@@ -23,7 +23,7 @@ export const routes: Routes = [
     loadComponent: () => import('./news/news.page').then( m => m.NewsPage)
   },
   {
-    path: 'weather/:city/:lat/:long',
+    path: 'weather/:country/:countryCode/:capital',
     loadComponent: () => import('./weather/weather.page').then( m => m.WeatherPage)
   },
   {
@@ -39,18 +39,12 @@ export const routes: Routes = [
     path: 'footer',
     loadComponent: () => import('./shared/footer/footer.page').then( m => m.FooterPage)
   },
-  {
-    path: 'cities/:country/:countryCode/:capital',
-    loadComponent: () => import('./cities/cities.page').then( m => m.CitiesPage)
-  },
+ 
   {
     path: 'header2',
     loadComponent: () => import('./shared/header2/header2.page').then( m => m.Header2Page)
   },
-  {
-    path: 'weather-favourites',
-    loadComponent: () => import('./weather-favourites/weather-favourites.page').then( m => m.WeatherFavouritesPage)
-  },
+  
   
    
 ];

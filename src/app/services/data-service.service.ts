@@ -39,13 +39,13 @@ export class DataServiceService {
     await this._storage.remove(key);
   }
 
-  async saveWeatherLocation(key: string, location: any) {
+  async saveItemToArray(key: string, identifier : any) {
     //  Retrieve the current weather locations array
     const weatherArray = await this.getArray(key);
     console.log('Current weather locations:', weatherArray);
   
     //  Add the new location data
-    weatherArray.push(location);
+    weatherArray.push(identifier);
   
     //  Save the updated array back to storage
     await this._storage.set(key, JSON.stringify(weatherArray));
