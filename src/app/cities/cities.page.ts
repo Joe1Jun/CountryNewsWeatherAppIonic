@@ -143,6 +143,7 @@ try {
   }
 
    const response =  await this.mhs.get(options);
+   //Checks if the name matches the name from the cities API 
     let location = response.data
     if(location.name.toLowerCase() !== name ){
       location.name = name;
@@ -151,6 +152,33 @@ try {
    
    console.log(this.weatherLocations)
   }  
+
+
+  saveWeatherLocations(id : number, name : string){
+    //Should just save the parameters needed to make the API call from the favourites page
+    // So just need longitude and latitude
+    
+    // This object holds the values to be saved to storage
+    const location = {
+      id : id,
+      name : name
+    }
+
+    this.mds.saveWeatherLocation('weatherLocations', location )
+    
+  }
+
+  removeItemsFromArray (id : number){
+       
+    for(let i = 0 ; i < this.weatherLocations.length; i++){
+
+      if(id === this.weatherLocations[i].id){
+        this.weatherLocations.splice(this.weatherLocations[i])
+      }
+    }
+    this.ionViewWillEnter();
+
+  }
 
 
 

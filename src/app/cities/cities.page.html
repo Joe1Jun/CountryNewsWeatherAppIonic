@@ -35,7 +35,8 @@ ion-content [fullscreen]="true" *ngIf="cities && cities.length > 0" >
       <ion-card-title>Weather in {{location.name}} is {{location.weather[0].description}} </ion-card-title>
       <ion-card-subtitle>Current temperature: {{location.main.temp}}</ion-card-subtitle>
     </ion-card-header>
-   <!-- <ion-button (click)="removeItem(location.id)" >Remove location</ion-button>-->
+    <ion-button (click)="saveWeatherLocations(location.id, location.name)">Save Location</ion-button>
+    <ion-button (click)="removeItemsFromArray(location.id)" >Remove location</ion-button>
   </ion-card>
   
   

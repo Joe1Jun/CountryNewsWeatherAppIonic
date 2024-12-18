@@ -47,7 +47,8 @@ export class WeatherFavouritesPage implements OnInit {
     this.storedWeatherLocations= response;
 
     for(let i = 0 ;i <  this.storedWeatherLocations.length; i++){
-      this.getWeather(this.storedWeatherLocations[i].id);
+
+      this.getWeather(this.storedWeatherLocations[i].id, this.storedWeatherLocations[i].name);
      
       
     }
@@ -59,7 +60,7 @@ export class WeatherFavouritesPage implements OnInit {
   }
 
 
-  async getWeather(id:  number){
+  async getWeather(id:  number, name : string){
      
     
     
@@ -73,6 +74,12 @@ export class WeatherFavouritesPage implements OnInit {
      try {
       // The Api response will be held in the response variable returned from myHttpService
       const response = await this.mhs.get(options);
+      let location = response.data;
+      console.log(location.name)
+      if(location.name != name){
+        location.name = name 
+      }
+
 
       // this populates the weather array as the items are retrieved from the API
      this.weatherLocations.push(response.data);
