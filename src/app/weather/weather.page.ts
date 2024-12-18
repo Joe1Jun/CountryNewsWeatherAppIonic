@@ -26,7 +26,7 @@ export class WeatherPage implements OnInit {
   units! : string 
  latitude! : number;
  longitude! : number;
-
+  id! : number;
  
 apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
 
@@ -39,26 +39,27 @@ apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
       this.city = params.get('city') || '';
       this.latitude = parseFloat(params.get('lat')!);
       this.longitude = parseFloat(params.get('long')!);
-
+      
       console.log('Latitude:', this.latitude); 
       console.log('Longitude:', this.longitude); 
       
      })
 
-    
-    
-    
-   
-    
-    this.setUpTemperature();
-   
-   
-
   }
+    
+   ionViewWillEnter(){
+    this.setUpTemperature();
 
- ionViewWillEnter(){
+    }
+   
+    
+   
+   
+   
+
   
-}
+
+ 
 
 //This promise inside the method is essential so that the units specified by the user 
 // can be added to the API route. Otherwise the weather data woud render before units is retrieved from storage
@@ -91,6 +92,8 @@ async getTempType(){
       // Assign the object variable this.weather to the response data
      this.weather = response.data;
      // Console log to see full object in the console
+     this.id = this.weather.id;
+     console.log(this.id);
      console.log(this.weather);
      // This will catch an error and display it in the console.
      } catch (error) {
@@ -109,7 +112,7 @@ async getTempType(){
     const location = {
       latitude :this.latitude,
       longitude : this.longitude,
-       name : this.city
+      id : this.id
     }
 
     this.mds.saveWeatherLocation('weatherLocations', location )

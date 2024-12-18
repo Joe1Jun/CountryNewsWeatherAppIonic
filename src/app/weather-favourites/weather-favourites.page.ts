@@ -26,8 +26,18 @@ export class WeatherFavouritesPage implements OnInit {
 
   ngOnInit() {
 
-    this.getFavouriteWeatherLocations();
+   
   }
+
+  
+ // Lifecycle hook: Runs every time the page is about to be displayed.
+ //Using `ionViewWillEnter` ensures that storage and other asynchronous dependencies
+  //are fully initialized before fetching weather favourites.
+ // This avoids timing issues that occur with `ngOnInit`, which may run too early.
+ 
+  ionViewWillEnter() {
+    this.getFavouriteWeatherLocations();
+}
 
 
   async getFavouriteWeatherLocations(){
@@ -75,11 +85,11 @@ export class WeatherFavouritesPage implements OnInit {
 
   }
 
-  removeItem(locationLat : number){
+  removeItem(id : number){
 
-
-    this.mds.removeItemFromArray('weatherLocations', locationLat )
-    
+    console.log(id)
+    this.mds.removeItemFromArray('weatherLocations', id)
+   
     
   }
 }
