@@ -44,4 +44,22 @@ export class NewsFavouritesPage implements OnInit {
    
   }
 
+  async removeItem(id : number){
+
+    console.log(id)
+   
+    try {
+      // Remove the item from storage
+      await this.mds.removeItemFromArray("news" ,  id);
+  
+       // Clear the existing weather locations array
+       this.newsArticles= [];
+       console.log("Storage array : " + this.mds.getArray("news"))
+      // Fetch the updated weather data
+      await this.ionViewWillEnter();
+    } catch (error) {
+      console.log("Error removing item or updating weather locations", error);
+    }
+
+  }
 }
