@@ -23,17 +23,18 @@ import { ApiService } from '../services/api.service';
 // ** 
 
 export class WeatherPage implements OnInit {
-  
+
+
   apiKey! : string;
   capital! : string;
-  capitalWeather! : any;
+  capitalWeather : any = null // Declares it as an object instead of an array
   country! : string;
   weatherLocations : any[] = [];
   countryCode! : string ;
   userLocationInput! : string;
   units! : string;
   storedWeatherLocations : any [] = []
-  
+
 
   
  

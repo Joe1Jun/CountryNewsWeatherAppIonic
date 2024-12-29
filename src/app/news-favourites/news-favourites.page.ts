@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButton } from '@ionic/angular/standalone';
 import { DataServiceService } from '../services/data-service.service';
 import { Header2Page } from '../shared/header2/header2.page';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-news-favourites',
@@ -15,13 +16,12 @@ import { Header2Page } from '../shared/header2/header2.page';
 export class NewsFavouritesPage implements OnInit {
    
   newsArticles : any  [] = []
- 
+  
 
   constructor(private mds : DataServiceService) { }
 
   ngOnInit() {
-
-    
+   
   }
 
   ionViewWillEnter(){

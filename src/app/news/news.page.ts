@@ -22,7 +22,6 @@ export class NewsPage implements OnInit {
  countryCode! : string; 
  news : any [] = [];
  
- // The news Url with the API key. Should add ENV file for this key later
  
  
   
@@ -31,7 +30,7 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
   ngOnInit(): void {
     
    this.apiKey = this.mApi.getNewsAPI();
-    
+   console.log(this.apiKey);
 
     this.route.paramMap.subscribe((params) => {
       this.country = params.get('country') || ' ';
