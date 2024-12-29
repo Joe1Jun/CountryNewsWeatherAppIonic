@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { Header2Page } from '../shared/header2/header2.page';
 import { DataServiceService } from '../services/data-service.service';
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.page.html',
@@ -23,24 +24,23 @@ import { DataServiceService } from '../services/data-service.service';
 
 export class WeatherPage implements OnInit {
   
+  apiKey! : string;
   capital! : string;
-  capitalWeather: any = null // Declares it as an object instead of an array
-
+  capitalWeather! : any;
   country! : string;
-  
   weatherLocations : any[] = [];
   countryCode! : string ;
-  
   userLocationInput! : string;
   units! : string;
   storedWeatherLocations : any [] = []
+  
 
-
-  apiKey : string = '8bad249b0b4bef6ad8a518b937c7d010'
+  
  
-  constructor(private route : ActivatedRoute, private router : Router, private mhs : MyHttpServiceService, private mds : DataServiceService) { }
+  constructor(private route : ActivatedRoute, private router : Router, private mhs : MyHttpServiceService, private mds : DataServiceService, private mApi : ApiService) { }
 
   ngOnInit() {
+    this.apiKey = this.mApi.getWeatherAPI();
 
     this.route.paramMap.subscribe((params) => {
       this.country = params.get('country') || ''

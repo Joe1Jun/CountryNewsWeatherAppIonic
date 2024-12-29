@@ -7,6 +7,7 @@ import { MyHttpServiceService } from '../services/my-http-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../services/data-service.service';
 import { Header2Page } from '../shared/header2/header2.page';
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-news',
   templateUrl: './news.page.html',
@@ -16,7 +17,7 @@ import { Header2Page } from '../shared/header2/header2.page';
 })
 export class NewsPage implements OnInit {
  
- 
+ apiKey! : string;
  country! :string;
  countryCode! : string; 
  news : any [] = [];
@@ -25,11 +26,11 @@ export class NewsPage implements OnInit {
  
  
   
-constructor(private mhs : MyHttpServiceService, private mds : DataServiceService, private route: ActivatedRoute){}
+constructor(private mhs : MyHttpServiceService, private mds : DataServiceService, private mApi : ApiService ,  private route: ActivatedRoute){}
 
   ngOnInit(): void {
     
-
+   this.apiKey = this.mApi.getNewsAPI();
     
 
     this.route.paramMap.subscribe((params) => {
@@ -54,7 +55,7 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
   async getNews(){
     
     let options : HttpOptions = {
-      url : `https://newsdata.io/api/1/latest?apikey=pub_61622a995ddc5cb7fb915bb2f0a5afa140633&country=${this.countryCode}`
+      url : `https://newsdata.io/api/1/latest?apikey=pub_${this.apiKey}&country=${this.countryCode}`
     }
 
 
