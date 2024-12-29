@@ -49,7 +49,7 @@ export class WeatherPage implements OnInit {
 // This method is called when the user clicks the button to submit the data
   ionViewWillEnter(){
     this.setUpTemperature();
-    
+    this.getCapitalWeather();
     }
 
     setUpTemperature(){
