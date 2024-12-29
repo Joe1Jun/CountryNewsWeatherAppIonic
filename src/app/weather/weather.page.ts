@@ -54,7 +54,14 @@ export class WeatherPage implements OnInit {
     
   }
 // This method is called when the user clicks the button to submit the data
+
   ionViewWillEnter(){
+    //Need to clear all the instance varaible arrays so that duplicates
+    // are not created 
+    this.weatherLocations = [];
+    this.storedWeatherLocations = [];
+    this.capitalWeather = null;
+
     this.setUpTemperature();
    
     }
@@ -147,7 +154,7 @@ export class WeatherPage implements OnInit {
     
      //Loop through the locations and pass the data to the getWeather function so that the latest weather for these
      // stored locations can be retrieved from the
-      for(let i = 1 ;i <  this.storedWeatherLocations.length; i++){
+      for(let i = 0 ;i <  this.storedWeatherLocations.length; i++){
 
         this.getStoredWeatherLocations(this.storedWeatherLocations[i].id, this.storedWeatherLocations[i].name);
          }
@@ -207,6 +214,10 @@ async getStoredWeatherLocations(id:  number, name : string){
     const response = await this.mhs.get(options);
     let location = response.data;
     console.log(location.name)
+
+   
+
+
     // In the weatherAPI the location coordinates 
     if(location.name != name){
       location.name = name 
