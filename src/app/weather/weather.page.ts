@@ -41,6 +41,7 @@ export class WeatherPage implements OnInit {
   constructor(private route : ActivatedRoute, private router : Router, private mhs : MyHttpServiceService, private mds : DataServiceService, private mApi : ApiService) { }
 
   ngOnInit() {
+    // This retrieves the apikey from the service
     this.apiKey = this.mApi.getWeatherAPI();
 
     this.route.paramMap.subscribe((params) => {
@@ -74,7 +75,34 @@ export class WeatherPage implements OnInit {
       console.log(this.units)
    }
 
-async getUserInputLocationCoordinates(){
+   async getCapitalWeather() {
+    try {
+      const options: HttpOptions = {
+        url: `https://api.openweathermap.org/data/2.5/weather?q=${this.capital}&units=${this.units}&appid=${this.apiKey}`,
+      };
+  
+      const response = await this.mhs.get(options);
+      this.capitalWeather = response.data; // Store the capital's weather data
+      console.log(this.capitalWeather);
+     
+    } catch (error) {
+      console.log("Error fetching capital weather data:", error);
+    }
+  }
+
+  // async getWeatherDataFromService(url : string) : Promise<any>{
+       
+  //      try {
+  //         const options : HttpOptions = {url};
+  //         const response = await this.mhs.get(options);
+  //         return response.data;
+  //      } catch (error) {
+  //         console.log("Error retrieving weather data :" , error);
+  //      }
+
+  // }
+
+  async getUserInputLocationCoordinates(){
     //checks if the user has inputted any data
      if(this.userLocationInput){
       //This route transforms to the open weather API 
@@ -88,7 +116,7 @@ async getUserInputLocationCoordinates(){
     
     console.log(response.data);
      
-    this.getWeatherLocations(response.data[0].lat, response.data[0].lon, this.userLocationInput) 
+    this.getUserInputtedWeatherLocations(response.data[0].lat, response.data[0].lon, this.userLocationInput) 
     console.log(response.data[0].lat)
     console.log(response.data[0].lon); 
     
@@ -104,75 +132,50 @@ async getUserInputLocationCoordinates(){
 
   }
 
-  async getCapitalWeather() {
-    try {
-      const options: HttpOptions = {
-        url: `https://api.openweathermap.org/data/2.5/weather?q=${this.capital}&units=${this.units}&appid=${this.apiKey}`,
-      };
   
-      const response = await this.mhs.get(options);
-      this.capitalWeather = response.data; // Store the capital's weather data
-      console.log(this.capitalWeather);
-     
-    } catch (error) {
-      console.log("Error fetching capital weather data:", error);
-    }
-  }
 
   
 
+  //This method loads all the weather locations saved previously by the user
   async getFavouriteWeatherLocations(){
     
-    
+    // Get the locations saved by the user from the data service
     const response = await  this.mds.getArray("weather" + this.countryCode)
     console.log(response);
     this.storedWeatherLocations= response;
    
     
-
+     //Loop through the locations and pass the data to the getWeather function so that the latest weather for these
+     // stored locations can be retrieved from the
       for(let i = 1 ;i <  this.storedWeatherLocations.length; i++){
 
-        this.getWeather(this.storedWeatherLocations[i].id, this.storedWeatherLocations[i].name);
-         
-
+        this.getStoredWeatherLocations(this.storedWeatherLocations[i].id, this.storedWeatherLocations[i].name);
+         }
     
-
-   
-      
-    }
-    
-   
-    
-    
-   
-  }
+   }
   
 
 
   
 
- async getWeatherLocations(lat : number, long : number, name : string){
-    console.log(lat, long)
+ async getUserInputtedWeatherLocations(lat : number, long : number, name : string){
+    
 
-
-
-  try {
+ try {
     let  options : HttpOptions = {
       url : `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=${this.units}&appid=${this.apiKey}`
     }
   
       const response =  await this.mhs.get(options);
-     //Checks if the name matches the name from the cities API 
+     
       let location = response.data
       if(location.name.toLowerCase() !== name ){
         location.name = name;
       }
-
+     // This adds the user location to the array
      this.weatherLocations.push(location)
-     for( let i = 0 ; i < this.weatherLocations.length; i++){
-          this.saveWeatherLocations(this.weatherLocations[i].id, this.weatherLocations[i].name)
-     }
-
+    
+     this.saveWeatherLocations(location.id, location.name);
      
 
      console.log(this.weatherLocations)
@@ -188,12 +191,12 @@ async getUserInputLocationCoordinates(){
  
   }  
 
-async getWeather(id:  number, name : string){
+async getStoredWeatherLocations(id:  number, name : string){
      
     
     
   let options : HttpOptions = {
-   //url : `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${this.units}&appid=${this.apiKey}`
+   
    url : `https://api.openweathermap.org/data/2.5/weather?id=${id}&appid=${this.apiKey}`
 
   }
@@ -204,6 +207,7 @@ async getWeather(id:  number, name : string){
     const response = await this.mhs.get(options);
     let location = response.data;
     console.log(location.name)
+    // In the weatherAPI the location coordinates 
     if(location.name != name){
       location.name = name 
     }
@@ -221,8 +225,6 @@ async getWeather(id:  number, name : string){
 
 
 }
-
-
 
   saveWeatherLocations(id : number, name : string){
     //Should just save the parameters needed to make the API call from the favourites page
