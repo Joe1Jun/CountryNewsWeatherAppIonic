@@ -1,6 +1,6 @@
 <app-header2></app-header2>
-
-<ion-content [fullscreen]="true" *ngIf="!loading" >
+<!-- ngIf makes sure the page wont try to load if the news retrieved is null-->
+<ion-content [fullscreen]="true" *ngIf="news !== null" >
 
 
 

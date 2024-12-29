@@ -52,10 +52,11 @@ export class NewsFavouritesPage implements OnInit {
       // Remove the item from storage
       await this.mds.removeItemFromArray("news" ,  id);
   
-       // Clear the existing weather locations array
+       // Clear the existing news array
        this.newsArticles= [];
+       // Fetch the updated news data
        console.log("Storage array : " + this.mds.getArray("news"))
-      // Fetch the updated weather data
+      // call the ionic life cycle to re render the page with updated data.
       await this.ionViewWillEnter();
     } catch (error) {
       console.log("Error removing item or updating weather locations", error);

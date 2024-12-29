@@ -16,6 +16,11 @@ import { DataServiceService } from '../services/data-service.service';
   standalone: true,
   imports: [IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonInput, IonButton, IonContent, CommonModule, FormsModule,RouterLink, Header2Page]
 })
+
+// **ORGANISE INTO MULTIPLE CLASSES MAYBE
+// ** NEED TO FIND SOLUTION TO TEMP TYPE NOT CHANGING
+// ** 
+
 export class WeatherPage implements OnInit {
   
   capital! : string;

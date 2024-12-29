@@ -1,10 +1,10 @@
 <app-header2></app-header2>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true"  *ngIf="countries !== null">
   <!--Used the card component from  https://ionicframework.com/docs/api/card -->
   <!-- The for loop will loop through all the countries and display each property defined in the code-->
   <!--The atributes are found from the console.logs used in the CountriesPage class -->
-  <ion-card *ngFor="let country of countries">
+  <ion-card *ngFor="let country of countries" >
     <img alt="CountryFlag" src="{{country.flags.png}}" />
     <ion-card-header>
       <ion-card-title>{{country.name.common}} </ion-card-title>
