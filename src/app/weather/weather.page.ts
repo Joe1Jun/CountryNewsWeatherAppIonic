@@ -55,20 +55,22 @@ export class WeatherPage implements OnInit {
 // This method is called when the user clicks the button to submit the data
   ionViewWillEnter(){
     this.setUpTemperature();
-    this.getCapitalWeather();
+   
     }
 
-    setUpTemperature(){
-      this.getTempType().then(() => {
-        
-        this.getFavouriteWeatherLocations();
-    
-    
-      })
+   async  setUpTemperature(){
+      try {
+         await this.getTempType();
+         await this.getCapitalWeather()
+         await this.getFavouriteWeatherLocations();
+
+      } catch (error) {
+        console.log("Failed to retrieve units" , error)
+      }
     }
     async getTempType(){
-      const tempType = await this.mds.getItem('temperatureType');
-      this.units = tempType;
+      const units = await this.mds.getItem('Units');
+      this.units = units;
       console.log(this.units)
    }
 

@@ -17,7 +17,7 @@ export class SettingsPage implements OnInit {
   selectedCelcius: boolean = false;
   selectedFahrenheit: boolean = false;
   selectedScientific: boolean = false;
-  value : string = "temperatureType"
+  value : string = "Units"
 
   constructor(private mds : DataServiceService, private pageLocation : Location) { }
 
@@ -40,6 +40,8 @@ export class SettingsPage implements OnInit {
        this.mds.setItem(this.value, 'standard')
         console.log('standard set successfully!');
       }
+
+      this.goBack();
   }
 
 }
