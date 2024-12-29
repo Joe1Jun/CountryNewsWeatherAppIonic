@@ -204,7 +204,7 @@ async getStoredWeatherLocations(id:  number, name : string){
     
   let options : HttpOptions = {
    
-   url : `https://api.openweathermap.org/data/2.5/weather?id=${id}&appid=${this.apiKey}`
+   url : `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=${this.units}&appid=${this.apiKey}`
 
   }
  
