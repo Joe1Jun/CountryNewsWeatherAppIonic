@@ -34,7 +34,7 @@ export class NewsFavouritesPage implements OnInit {
   async getFavouriteNewsArticles(){
     
     
-    const response = await  this.mds.getArray("newsIE" )
+    const response = await  this.mds.getArray("news" )
     console.log(response);
     this.newsArticles= response;
     

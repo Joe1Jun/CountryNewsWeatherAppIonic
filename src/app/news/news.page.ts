@@ -87,7 +87,7 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
       
     }
 
-    this.mds.saveItemToArray("news" + this.countryCode, newsArticle)
+    this.mds.saveItemToArray("news", newsArticle)
     
   }
 
