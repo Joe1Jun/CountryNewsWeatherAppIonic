@@ -16,7 +16,7 @@ import { Header2Page } from '../shared/header2/header2.page';
 })
 export class NewsPage implements OnInit {
  
- loading! : boolean;
+ 
  country! :string;
  countryCode! : string; 
  news : any [] = [];
@@ -52,7 +52,7 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
   
   //This asynchronous function will call the get function from the myHttpService
   async getNews(){
-    this.loading = true;
+    
     let options : HttpOptions = {
       url : `https://newsdata.io/api/1/latest?apikey=pub_61622a995ddc5cb7fb915bb2f0a5afa140633&country=${this.countryCode}`
     }
@@ -71,8 +71,6 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
 
     } catch (error) {
       console.log("Error retriving news ", error)
-    }finally{
-      this.loading = false;
     }
      
 
