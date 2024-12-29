@@ -97,35 +97,38 @@ export class WeatherPage implements OnInit {
     }
   }
 
-  // async getWeatherDataFromService(url : string) : Promise<any>{
+  //This method will retrieve the response data sent back from the service
+  // This method is to avoid duplicate code
+  async getWeatherDataFromService(url : string) : Promise<any>{
        
-  //      try {
-  //         const options : HttpOptions = {url};
-  //         const response = await this.mhs.get(options);
-  //         return response.data;
-  //      } catch (error) {
-  //         console.log("Error retrieving weather data :" , error);
-  //      }
+       try {
+          const options : HttpOptions = {url};
+          const response = await this.mhs.get(options);
+          return response.data;
+       } catch (error) {
+          console.log("Error retrieving weather data :" , error);
+       }
 
-  // }
+  }
 
   async getUserInputLocationCoordinates(){
     //checks if the user has inputted any data
-     if(this.userLocationInput){
+     if(!this.userLocationInput){
       //This route transforms to the open weather API 
-     let options : HttpOptions = {
-        url : `http://api.openweathermap.org/geo/1.0/direct?q=${this.userLocationInput},${this.countryCode}&appid=${this.apiKey}`
-
+      return 
      }
+     const  url = `http://api.openweathermap.org/geo/1.0/direct?q=${this.userLocationInput},${this.countryCode}&appid=${this.apiKey}`
+
+     
   try {
 
-    const response = await this.mhs.get(options);
+    const response = await this.getWeatherDataFromService(url);
     
-    console.log(response.data);
+    console.log(response);
      
-    this.getUserInputtedWeatherLocations(response.data[0].lat, response.data[0].lon, this.userLocationInput) 
-    console.log(response.data[0].lat)
-    console.log(response.data[0].lon); 
+    this.getUserInputtedLocationWeather(response[0].lat, response[0].lon, this.userLocationInput) 
+    console.log(response[0].lat)
+    console.log(response[0].lon); 
     
      
     }
@@ -135,7 +138,7 @@ export class WeatherPage implements OnInit {
     
   }
      
-     }
+     
 
   }
 
@@ -156,7 +159,7 @@ export class WeatherPage implements OnInit {
      // stored locations can be retrieved from the
       for(let i = 0 ;i <  this.storedWeatherLocations.length; i++){
 
-        this.getStoredWeatherLocations(this.storedWeatherLocations[i].id, this.storedWeatherLocations[i].name);
+        this.getStoredLocationsCurrentWeather(this.storedWeatherLocations[i].id, this.storedWeatherLocations[i].name);
          }
     
    }
@@ -165,17 +168,18 @@ export class WeatherPage implements OnInit {
 
   
 
- async getUserInputtedWeatherLocations(lat : number, long : number, name : string){
+ async getUserInputtedLocationWeather(lat : number, long : number, name : string){
     
 
  try {
-    let  options : HttpOptions = {
-      url : `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=${this.units}&appid=${this.apiKey}`
-    }
+    
+    const  url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=${this.units}&appid=${this.apiKey}`
+    
   
-      const response =  await this.mhs.get(options);
+      const response =  await this.getWeatherDataFromService(url);
      
-      let location = response.data
+      let location = response
+      // Change this to be more suitable *******;
       if(location.name.toLowerCase() !== name ){
         location.name = name;
       }
@@ -198,21 +202,21 @@ export class WeatherPage implements OnInit {
  
   }  
 
-async getStoredWeatherLocations(id:  number, name : string){
+async getStoredLocationsCurrentWeather(id:  number, name : string){
      
     
     
-  let options : HttpOptions = {
+  
    
-   url : `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=${this.units}&appid=${this.apiKey}`
+  const url = `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=${this.units}&appid=${this.apiKey}`
 
-  }
+  
  
  // Surround the API request in a try catch in case of errors.   
    try {
     // The Api response will be held in the response variable returned from myHttpService
-    const response = await this.mhs.get(options);
-    let location = response.data;
+    const response = await this.getWeatherDataFromService(url);
+    let location = response;
     console.log(location.name)
 
    
@@ -251,7 +255,7 @@ async getStoredWeatherLocations(id:  number, name : string){
     
   }
 
-  async removeItem(id : number){
+  async removeLocation(id : number){
 
     console.log(id)
    
