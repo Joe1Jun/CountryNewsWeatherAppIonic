@@ -45,7 +45,7 @@ export class SettingsPage implements OnInit {
       this.mds.setItem(this.value , unitType);
       
 
-      this.goBack();
+     // this.goBack();
   }
 
 }
