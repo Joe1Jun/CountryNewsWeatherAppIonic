@@ -125,18 +125,25 @@ export class WeatherPage implements OnInit {
      // Resets the error boolean to false
       this.isError = false;  
      
-     const  url = `http://api.openweathermap.org/geo/1.0/direct?q=${this.userLocationInput},${this.countryCode}&appid=${this.apiKey}`
+     const  url = `https://api.openweathermap.org/data/2.5/weather?q=${this.userLocationInput}&units=${this.units}&appid=${this.apiKey}`
 
      
   try {
 
     const response = await this.getWeatherDataFromService(url);
-    let location =  response.data;
-    console.log(response.data);
+    let location = response.data
+     //Change this to be more suitable *******;
+      if(location.name.toLowerCase() !== this.userLocationInput ){
+        location.name = this.userLocationInput;
+      }
+     // This adds the user location to the array
+     this.weatherLocations.push(location)
+    
+     this.saveWeatherLocations(location.id, location.name);
      
-    this.getUserInputtedLocationWeather(location[0].lat, location[0].lon, this.userLocationInput) 
-    console.log(location[0].lat)
-    console.log(location[0].lon); 
+
+     console.log(this.weatherLocations)
+
     
      // Reset the input to show the placeholder
      this.userLocationInput = ''
@@ -174,43 +181,6 @@ export class WeatherPage implements OnInit {
     
    }
   
-
-
-  
-
- async getUserInputtedLocationWeather(lat : number, long : number, name : string){
-    
-
- try {
-    
-    const  url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=${this.units}&appid=${this.apiKey}`
-    
-  
-      const response =  await this.getWeatherDataFromService(url);
-     
-      let location = response.data
-     //Change this to be more suitable *******;
-      if(location.name.toLowerCase() !== name ){
-        location.name = name;
-      }
-     // This adds the user location to the array
-     this.weatherLocations.push(location)
-    
-     this.saveWeatherLocations(location.id, location.name);
-     
-
-     console.log(this.weatherLocations)
-
-
-
-
-
-  } catch (error) {
-     console.log("Problem retrieving weather data", error)
-  }
-
- 
-  }  
 
 async getStoredLocationsCurrentWeather(id:  number, name : string){
      
