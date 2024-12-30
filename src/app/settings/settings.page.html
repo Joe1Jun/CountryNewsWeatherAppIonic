@@ -12,11 +12,20 @@
 
 <ion-content [fullscreen]="true">
  
-  <ion-checkbox (click)="saveSelection('metric')" [checked]="selectedTemperatureUnit === 'metric'">Metric</ion-checkbox>
+  <ion-checkbox 
+  (ionChange)="saveSelection('metric')" 
+  [checked]="selectedTemperatureUnit === 'metric'"
+  >Metric</ion-checkbox>
 <br>
-<ion-checkbox (click)="saveSelection('imperial')" [checked]="selectedTemperatureUnit === 'imperial'" >Imperial</ion-checkbox>
+<ion-checkbox  
+(ionChange)="saveSelection('imperial')" 
+[checked]="selectedTemperatureUnit === 'imperial'"
+  >Imperial</ion-checkbox>
 <br>
-<ion-checkbox (click)="saveSelection('standard')" [checked]="selectedTemperatureUnit === 'standard' ">Standard</ion-checkbox>
+<ion-checkbox  
+(ionChange)="saveSelection('standard')" 
+[checked]="selectedTemperatureUnit === 'standard'" 
+>Standard</ion-checkbox>
 <br>
 
 
