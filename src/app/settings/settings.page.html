@@ -13,16 +13,15 @@
 <ion-content [fullscreen]="true">
  
   <ion-list>
-    <ion-radio-group value="start">
-      <ion-item>
-        <ion-radio value="start" labelPlacement="stacked" alignment="start">Aligned to the Start</ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  
-    <ion-radio-group value="center">
-      <ion-item>
-        <ion-radio value="center" labelPlacement="stacked" alignment="center">Aligned to the Center</ion-radio>
-      </ion-item>
+    <ion-radio-group  [(ngModel)]="selectedTemperatureUnit" (ionChange)="saveSelection(selectedTemperatureUnit)">
+        
+
+        <ion-radio value="metric" labelPlacement="stacked" alignment="center">Metric</ion-radio>
+        <hr>
+        <ion-radio value="imperial" labelPlacement="stacked" alignment="center">Imperial</ion-radio>
+        <hr>
+        <ion-radio value="standard" labelPlacement="stacked" alignment="center">Standard</ion-radio>
+     
     </ion-radio-group>
   </ion-list>
 
