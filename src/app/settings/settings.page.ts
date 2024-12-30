@@ -21,9 +21,7 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
      
-    if(this.selectedTemperatureUnit === null){
-       this.saveSelection('metric')
-    }
+    this.getCurrentTemperatureUnit();
     
   }
 
@@ -31,9 +29,14 @@ export class SettingsPage implements OnInit {
     this.pageLocation.back();
   }
 
+
+
   async getCurrentTemperatureUnit(){
 
     this.selectedTemperatureUnit = await  this.mds.getItem('Units')
+    if(this.selectedTemperatureUnit === null){
+      this.saveSelection('metric')
+    }
     console.log(this.selectedTemperatureUnit)
   }
 
