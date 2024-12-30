@@ -14,14 +14,16 @@ import { Location } from '@angular/common';
 })
 export class SettingsPage implements OnInit {
    
-  selectedCelcius: boolean = false;
-  selectedFahrenheit: boolean = false;
-  selectedScientific: boolean = false;
+  selectedTemperatureUnit! : string;
   value : string = "Units"
 
   constructor(private mds : DataServiceService, private pageLocation : Location) { }
 
   ngOnInit() {
+     
+    if(this.selectedTemperatureUnit === null){
+       this.saveSelection('metric')
+    }
     
   }
 
@@ -29,17 +31,14 @@ export class SettingsPage implements OnInit {
     this.pageLocation.back();
   }
 
-  saveSelection() {
-    if (this.selectedCelcius) {
-      this.mds.setItem(this.value, 'metric')
-      console.log('Metric units set successfully!');
-      } else if (this.selectedFahrenheit) {
-      this.mds.setItem(this.value, 'imperial')
-        console.log('Imperial units set successfully!');
-      } else if (this.selectedScientific) {
-       this.mds.setItem(this.value, 'standard')
-        console.log('standard set successfully!');
-      }
+  async getCurrentTemperatureUnit(){
+
+    this.selectedTemperatureUnit = await  this.mds.getItem('Units')
+    console.log(this.selectedTemperatureUnit)
+  }
+
+  saveSelection(unitType : string) {
+    
 
       this.goBack();
   }
