@@ -39,6 +39,8 @@ export class SettingsPage implements OnInit {
 
   saveSelection(unitType : string) {
     
+      this.mds.setItem(this.value , unitType);
+      
 
       this.goBack();
   }

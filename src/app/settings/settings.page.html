@@ -12,12 +12,12 @@
 
 <ion-content [fullscreen]="true">
   <!-- When ngModel interacts with the checkbox it changes the selected boolean value to true-->
-  <ion-checkbox [(ngModel)]="selectedCelcius">Metric</ion-checkbox>
+  <ion-checkbox (click)="saveSelection('metric')">Metric</ion-checkbox>
 <br>
-<ion-checkbox [(ngModel)]="selectedFahrenheit">Imperial</ion-checkbox>
+<ion-checkbox (click)="saveSelection('imperial')" >Imperial</ion-checkbox>
 <br>
-<ion-checkbox [(ngModel)]="selectedScientific">Standard</ion-checkbox>
+<ion-checkbox (click)="saveSelection('scientific')">Standard</ion-checkbox>
 <br>
 <!-- When the submit button is selected it will save the users choice in storage -->
-<ion-button (click)="saveSelection()">Submit</ion-button>
+
 </ion-content>
