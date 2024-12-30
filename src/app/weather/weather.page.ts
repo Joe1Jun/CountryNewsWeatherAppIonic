@@ -125,7 +125,8 @@ export class WeatherPage implements OnInit {
      // Resets the error boolean to false
       this.isError = false;  
      
-     const  url = `https://api.openweathermap.org/data/2.5/weather?q=${this.userLocationInput}&units=${this.units}&appid=${this.apiKey}`
+      // This url attachs the country code to the user input making sure only locations from the specific countries can be fetched.
+     const  url = `https://api.openweathermap.org/data/2.5/weather?q=${this.userLocationInput},${this.countryCode}&units=${this.units}&appid=${this.apiKey}`
 
      
   try {
@@ -184,10 +185,6 @@ export class WeatherPage implements OnInit {
 
 async getStoredLocationsCurrentWeather(id:  number, name : string){
      
-    
-    
-  
-   
   const url = `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=${this.units}&appid=${this.apiKey}`
 
   

@@ -33,10 +33,16 @@ export class NewsFavouritesPage implements OnInit {
 
   async getFavouriteNewsArticles(){
     
+    try {
+
+      const response = await  this.mds.getArray("news" )
+      console.log(response);
+      this.newsArticles= response;
+      
+    } catch (error) {
+      console.log("Error retrieving news articles", error);
+    }
     
-    const response = await  this.mds.getArray("news" )
-    console.log(response);
-    this.newsArticles= response;
     
    
     

@@ -1,30 +1,44 @@
 <app-header2></app-header2>
-<!-- ngIf makes sure the page wont try to load if the news retrieved is null-->
-<ion-content [fullscreen]="true" *ngIf="news !== null" >
 
 
 
+<ion-content [fullscreen]="true"  >
 
-  <div class="newsArticles" *ngFor="let newsArticle of news">
-    <a href="{{newsArticle.link}}" target="blank" class="link">
-
-      <ion-card >
-        <img alt="News Picture" src="{{newsArticle.image_url}}" />
-        <ion-card-header>
-          <ion-card-title>{{newsArticle.description}}</ion-card-title>
-          <ion-card-subtitle>{{newsArticle.title}}</ion-card-subtitle>
-        </ion-card-header>
-      
-        
-      </ion-card>
-      
-
-    </a>
-    <ion-button (click)="saveItem(newsArticle)" >Save Article </ion-button>
-  
-  
+ 
+  <div class="noNewsArticle" *ngIf="!newsIsFetched && news.length === 0">
+    <ion-text>
+      No news articles available for {{ country }}.
+    </ion-text>
   </div>
+ <!-- ngIf makes sure the page wont try to load if the news retrieved is null-->
+  <div class="newsArticles" *ngIf="newsIsFetched && news.length > 0">
+
+    <div  *ngFor="let newsArticle of news">
+
+
+      <a href="{{newsArticle.link}}" target="blank" class="link">
+  
+        <ion-card >
+          <img alt="News Picture" src="{{newsArticle.image_url}}" />
+          <ion-card-header>
+            <ion-card-title>{{newsArticle.description}}</ion-card-title>
+            <ion-card-subtitle>{{newsArticle.title}}</ion-card-subtitle>
+          </ion-card-header>
+        
+          
+        </ion-card>
+        
+  
+      </a>
+      <ion-button (click)="saveItem(newsArticle)" >Save Article </ion-button>
     
+    
+    </div>
+      
+
+  </div>
+
+  
 
 
 
