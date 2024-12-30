@@ -86,11 +86,10 @@ export class WeatherPage implements OnInit {
 
    async getCapitalWeather() {
     try {
-      const options: HttpOptions = {
-        url: `https://api.openweathermap.org/data/2.5/weather?q=${this.capital}&units=${this.units}&appid=${this.apiKey}`,
-      };
+      const url =  `https://api.openweathermap.org/data/2.5/weather?q=${this.capital}&units=${this.units}&appid=${this.apiKey}`
+      
   
-      const response = await this.mhs.get(options);
+      const response = await this.getWeatherDataFromService(url);
       this.capitalWeather = response.data; // Store the capital's weather data
       console.log(this.capitalWeather);
      
