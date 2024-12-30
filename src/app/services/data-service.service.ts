@@ -31,7 +31,7 @@ export class DataServiceService {
   }
 //This item will retrieve the item from storage.
   async getItem(key : string) : Promise<string> {
-    console.log("TEST4")
+    
     return await this._storage.get(key) || null;
    
   }

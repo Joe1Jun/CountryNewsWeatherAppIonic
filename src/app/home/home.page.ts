@@ -25,9 +25,9 @@ export class HomePage  {
   }
 
   async getCurrentTemperatureUnit(){
-   console.log("TEST2")
+   
     try {
-    console.log("TEST3")
+    
     this.selectedTemperatureUnit = await  this.mds.getItem('Units')
     if(!this.selectedTemperatureUnit){
       this.saveSelection('metric')

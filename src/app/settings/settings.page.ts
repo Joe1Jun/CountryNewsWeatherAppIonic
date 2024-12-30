@@ -33,19 +33,32 @@ export class SettingsPage implements OnInit {
 
   async getCurrentTemperatureUnit(){
 
-    this.selectedTemperatureUnit = await  this.mds.getItem('Units')
-    if(this.selectedTemperatureUnit === null){
-      this.saveSelection('metric')
-    }
-    console.log(this.selectedTemperatureUnit)
+    try {
+    
+      this.selectedTemperatureUnit = await  this.mds.getItem('Units')
+      
+      console.log(this.selectedTemperatureUnit)
+  
+        
+      } catch (error) {
+        
+        console.log("Error with data service", error)
+      }
   }
 
   saveSelection(unitType : string) {
     
+    try {
+
       this.mds.setItem(this.value , unitType);
       
+    } catch (error) {
+      
+      console.log("Error setting storage item", error)
+    }
+      
+      
 
-     // this.goBack();
   }
 
 }
