@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonButton, IonInput, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonInput, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonText, IonIcon } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { HttpOptions } from '@capacitor/core';
@@ -15,7 +15,7 @@ import { ApiService } from '../services/api.service';
   templateUrl: './weather.page.html',
   styleUrls: ['./weather.page.scss'],
   standalone: true,
-  imports: [IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonInput, IonButton, IonContent, CommonModule, FormsModule,RouterLink, Header2Page]
+  imports: [IonIcon, IonText, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonInput, IonButton, IonContent, CommonModule, FormsModule,RouterLink, Header2Page]
 })
 
 // **ORGANISE INTO MULTIPLE CLASSES MAYBE
@@ -34,7 +34,8 @@ export class WeatherPage implements OnInit {
   userLocationInput! : string;
   units! : string;
   storedWeatherLocations : any [] = []
-
+  isError : boolean = false;
+  message! : string;
 
   
  
@@ -61,6 +62,7 @@ export class WeatherPage implements OnInit {
     this.weatherLocations = [];
     this.storedWeatherLocations = [];
     this.capitalWeather = null;
+    this.isError = false
 
     this.setUpTemperature();
    
@@ -104,40 +106,49 @@ export class WeatherPage implements OnInit {
        try {
           const options : HttpOptions = {url};
           const response = await this.mhs.get(options);
-          return response.data;
+          return response;
        } catch (error) {
           console.log("Error retrieving weather data :" , error);
        }
 
   }
 
+
+  noDataForLocation(){
+     this.isError = true;
+     this.message = `Location "${this.userLocationInput}" does not exist in ${this.country}`
+    
+  }
+
   async getUserInputLocationCoordinates(){
     //checks if the user has inputted any data
-     if(!this.userLocationInput){
-      //This route transforms to the open weather API 
-      return 
-     }
+     if(this.userLocationInput){
+     // Resets the error boolean to false
+      this.isError = false;  
+     
      const  url = `http://api.openweathermap.org/geo/1.0/direct?q=${this.userLocationInput},${this.countryCode}&appid=${this.apiKey}`
 
      
   try {
 
     const response = await this.getWeatherDataFromService(url);
-    
-    console.log(response);
+    let location =  response.data;
+    console.log(response.data);
      
-    this.getUserInputtedLocationWeather(response[0].lat, response[0].lon, this.userLocationInput) 
-    console.log(response[0].lat)
-    console.log(response[0].lon); 
+    this.getUserInputtedLocationWeather(location[0].lat, location[0].lon, this.userLocationInput) 
+    console.log(location[0].lat)
+    console.log(location[0].lon); 
     
-     
+     // Reset the input to show the placeholder
+     this.userLocationInput = ''
     }
     
      catch (error) {
+      
     console.log("Error fetching coordinates" , error)
-    
+    this.noDataForLocation();
   }
-     
+}
      
 
   }
@@ -178,8 +189,8 @@ export class WeatherPage implements OnInit {
   
       const response =  await this.getWeatherDataFromService(url);
      
-      let location = response
-      // Change this to be more suitable *******;
+      let location = response.data
+     //Change this to be more suitable *******;
       if(location.name.toLowerCase() !== name ){
         location.name = name;
       }
@@ -216,7 +227,7 @@ async getStoredLocationsCurrentWeather(id:  number, name : string){
    try {
     // The Api response will be held in the response variable returned from myHttpService
     const response = await this.getWeatherDataFromService(url);
-    let location = response;
+    let location = response.data;
     console.log(location.name)
 
    
