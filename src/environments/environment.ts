@@ -1,4 +1,6 @@
 
+//This is basically the env file that stores api keys for the API services
+// This means a lot more security then the keys being on display
 
 export const environment = {
   production: false,

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonList, IonRadioGroup, IonRadio } from '@ionic/angular/standalone';
 import { DataServiceService } from '../services/data-service.service';
-
 import { Location } from '@angular/common';
 @Component({
   selector: 'app-settings',
