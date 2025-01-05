@@ -18,6 +18,7 @@ export class Header2Page implements OnInit {
   ngOnInit() {
   }
 
+  // Takes the user to previous page.
   goBack() {
     this.pageLocation.back();
   }
