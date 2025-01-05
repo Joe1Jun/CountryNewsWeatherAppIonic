@@ -220,7 +220,6 @@ async getStoredLocationsCurrentWeather(id:  number, name : string){
 
   saveWeatherLocations(id : number, name : string){
     //Should just save the parameters needed to make the API call from the favourites page
-    // So just need longitude and latitude
     
     // This object holds the values to be saved to storage
     const location = {

@@ -8,9 +8,12 @@
   <ion-input placeholder="Search for a location" required="true" [(ngModel)]="userLocationInput"></ion-input>
   <ion-button (click)="getUserInputLocationCoordinates()">Search</ion-button>
 
-  <ion-text *ngIf="isError"  color="danger">
-   {{message}}
-  </ion-text>
+  <div class="errorMessage">
+    <ion-text *ngIf="isError">
+      {{message}}
+     </ion-text>
+  </div>
+  
 
   <ion-card *ngIf="capitalWeather !== null">
     <ion-card-title>{{capital}}</ion-card-title>

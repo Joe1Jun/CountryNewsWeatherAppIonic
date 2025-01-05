@@ -5,11 +5,13 @@
 <ion-content [fullscreen]="true"  >
 
  
-  <div class="noNewsArticle" *ngIf="!newsIsFetched && news.length === 0">
-    <ion-text>
-      No news articles available for {{ country }}.
-    </ion-text>
-  </div>
+  <ion-content [fullscreen]="true">
+    <!-- Display message when news is not fetched -->
+    <div class="noNewsArticle" *ngIf="!newsIsFetched">
+      <ion-text>
+        No news articles available for {{ country }}.
+      </ion-text>
+    </div>
  <!-- ngIf makes sure the page wont try to load if the news retrieved is null-->
   <div class="newsArticles" *ngIf="newsIsFetched && news.length > 0">
 

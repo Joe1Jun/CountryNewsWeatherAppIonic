@@ -63,12 +63,15 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
     try {
       // Stores the response from the API in a varaible called response  
     const response = await this.mhs.get(options);
-    if(response.data === null){
-        return;
-    }
-    // if(response.data > 0 && response.data !== null){
+    
 
-    this.newsIsFetched = true;
+    // Check if data exists in the response
+    if (response.data && response.data.results && response.data.results.length > 0) {
+      this.news = response.data.results;  // Populate the news array
+      this.newsIsFetched = true;          // Mark as fetched only after valid data is received
+    } else {
+      this.newsIsFetched = false;         // No news data
+    }
     
 
     // Log the data to the console to inspect the attributes
@@ -83,6 +86,7 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
     } catch (error) {
       
       console.log("Error retriving news ", error)
+      this.newsIsFetched = false;
     }
      
 

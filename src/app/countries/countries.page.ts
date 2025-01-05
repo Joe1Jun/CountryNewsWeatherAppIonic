@@ -20,7 +20,7 @@ export class CountriesPage implements OnInit {
   // This will store the searchTerm parameter in the route.
   searchTerm! : string;
 
-  // countries will hole all the country objects retreived from the API.
+  // countries will hold all the country objects retreived from the API.
   // Therefore is intialised as an empty array that can hold any type of data.
   countries : any [] = [];
   
@@ -39,7 +39,7 @@ export class CountriesPage implements OnInit {
       if(this.searchTerm){
         this.getCountriesFromParams();
         //If there is no parameter retrieve all countries
-        //**** REFINE THIS LATER AS AN OPTION FROM THE HOMEPAGE */
+       
       } else{
         this.getAllCountries(); 
       }
