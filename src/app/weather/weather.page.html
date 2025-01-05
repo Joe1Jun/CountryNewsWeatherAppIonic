@@ -5,8 +5,18 @@
     
 <ion-content [fullscreen]="true" >
 
-  <ion-input placeholder="Search for a location" required="true" [(ngModel)]="userLocationInput"></ion-input>
+ <!-- Display message when news is not fetched -->
+ <div class="noWeatherData" *ngIf="!weatherIsFetched">
+  <ion-text>
+    No weather information for {{ country }}.
+  </ion-text>
+</div>
+
+<div *ngIf="weatherIsFetched">
+  <ion-input placeholder="Search for a location" required="true"  [(ngModel)]="userLocationInput"></ion-input>
   <ion-button (click)="getUserInputLocationCoordinates()">Search</ion-button>
+</div>
+  
 
   <div class="errorMessage">
     <ion-text *ngIf="isError">

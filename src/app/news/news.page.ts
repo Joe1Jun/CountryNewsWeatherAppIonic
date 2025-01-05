@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButton, IonText } from '@ionic/angular/standalone';
+import { IonContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButton, IonText, IonSpinner } from '@ionic/angular/standalone';
 import { HttpOptions } from '@capacitor/core';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +13,7 @@ import { ApiService } from '../services/api.service';
   templateUrl: './news.page.html',
   styleUrls: ['./news.page.scss'],
   standalone: true,
-  imports: [IonText, IonButton,  IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonContent, CommonModule, FormsModule, Header2Page]
+  imports: [IonSpinner, IonText, IonButton,  IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonContent, CommonModule, FormsModule, Header2Page]
 })
 export class NewsPage implements OnInit {
  
@@ -22,8 +22,8 @@ export class NewsPage implements OnInit {
  countryCode! : string; 
  news : any [] = [];
  // Sets news fetched to false. If this is false a message is displayed to the user
- newsIsFetched : boolean = false;
- 
+ isLoading: boolean = false;  // Add this new property
+  newsIsFetched: boolean = false;
  
   
 constructor(private mhs : MyHttpServiceService, private mds : DataServiceService, private mApi : ApiService ,  private route: ActivatedRoute){}
@@ -32,7 +32,7 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
     
     // This fetches the news api from the api service
    this.apiKey = this.mApi.getNewsAPI();
-   
+   this.newsIsFetched = false; // Explicitly set to false initially
 
     this.route.paramMap.subscribe((params) => {
       this.country = params.get('country') || ' ';
@@ -54,7 +54,8 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
   
   //This asynchronous function will call the get function from the myHttpService
   async getNews(){
-    
+    this.isLoading = true;  // Set loading to true when starting the request
+
     let options : HttpOptions = {
       url : `https://newsdata.io/api/1/latest?apikey=pub_${this.apiKey}&country=${this.countryCode}`
     }
@@ -67,7 +68,7 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
 
     // Check if data exists in the response
     if (response.data && response.data.results && response.data.results.length > 0) {
-      this.news = response.data.results;  // Populate the news array
+      this.news = response.data;  // Populate the news array
       this.newsIsFetched = true;          // Mark as fetched only after valid data is received
     } else {
       this.newsIsFetched = false;         // No news data
@@ -87,6 +88,8 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
       
       console.log("Error retriving news ", error)
       this.newsIsFetched = false;
+    }finally {
+      this.isLoading = false;  // Set loading to false when complete
     }
      
 

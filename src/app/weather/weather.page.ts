@@ -36,7 +36,7 @@ export class WeatherPage implements OnInit {
   storedWeatherLocations : any [] = []
   isError : boolean = false;
   message! : string;
-
+  weatherIsFetched!: boolean ;
   
  
   constructor(private route : ActivatedRoute, private router : Router, private mhs : MyHttpServiceService, private mds : DataServiceService, private mApi : ApiService) { }
@@ -90,10 +90,18 @@ export class WeatherPage implements OnInit {
       
   
       const response = await this.getWeatherDataFromService(url);
-      this.capitalWeather = response.data; // Store the capital's weather data
-      console.log(this.capitalWeather);
+      
+      if(response.data.length > 0  ){
+        this.weatherIsFetched = true;
+        this.capitalWeather = response.data; // Store the capital's weather data
+        console.log(this.capitalWeather);
+
+      }
+
+      
      
     } catch (error) {
+      this.weatherIsFetched = false;
       console.log("Error fetching capital weather data:", error);
     }
   }
