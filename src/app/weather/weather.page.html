@@ -1,4 +1,3 @@
-
 <!--This is the header imported from the shared folders to be used by all pages besides the settings and home pages-->
 <app-header2></app-header2>
 
@@ -6,57 +5,41 @@
 
     
 <ion-content [fullscreen]="true" >
-
-  
-
- <!-- Display message when weather is not fetched -->
- <div class="noWeatherData" *ngIf="!isWeather">
-  <ion-text>
-   {{message}}.
-  </ion-text>
-</div>
-
 <!-- This displays the input box and the option to search -->
  <!-- ngmodel allows for two way binding of the variable which means as the user changes it in the input field it is changed on the ts page which
   uses it to get an API response-->
-<div *ngIf="capitalWeather && isWeather ">
-  <ion-input placeholder="Search for a location" required="true"  [(ngModel)]="userLocationInput"></ion-input>
+  <ion-input placeholder="Search for a location" required="true" [(ngModel)]="userLocationInput"></ion-input>
   <ion-button (click)="getUserInputLocationCoordinates()">Search</ion-button>
-</div>
-  
-<!--Displays an error message if the user enters a wrong location for that country-->
+
+  <!--Displays an error message if the user enters a wrong location for that country-->
   <div class="errorMessage">
     <ion-text *ngIf="isError">
       {{message}}
      </ion-text>
   </div>
   
-  <div class="capitalCard">
-    <!-- Displays the capital city of that countried weather. This will always be displayed if the capital exists in the API-->
-    <ion-card *ngIf="capitalWeather && capitalWeather.weather">
-      <ion-card-title>{{capital}}</ion-card-title>
-      <!-- Attach the weather icon from the data array dynamically to the url-->
-      <img  [src]="'https://openweathermap.org/img/wn/' + capitalWeather.weather[0].icon + '@2x.png'" alt="Weather Icon" />
-        
+ <!-- Displays the capital city of that countried weather. This will always be displayed if the capital exists in the API-->
+  <ion-card *ngIf="capitalWeather !== null">
+    <ion-card-title>{{capital}}</ion-card-title>
+     <!-- Attach the weather icon from the data array dynamically to the url-->
+    <img  [src]="'https://openweathermap.org/img/wn/' + capitalWeather.weather[0].icon + '@2x.png'" alt="Weather Icon" />
       
-     
-      <ion-card-header>
-        <ion-card-title>{{capitalWeather.weather[0].description}}</ion-card-title>
-        
-        
-        <ion-card-subtitle>{{capitalWeather.main.temp}} ({{units}})</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>
-
-  </div>
-
+    
+   
+    <ion-card-header>
+      <ion-card-title>{{capitalWeather.weather[0].description}}</ion-card-title>
+      
+      
+      <ion-card-subtitle>{{capitalWeather.main.temp}} ({{units}})</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
    
   <!-- Displays the saved locations if the array is not null-->
   <div class="savedLocations"*ngIf="weatherLocations !== null">
 
- <!-- Loops thorugh the weather location from  the storage array and displays the latest data for each from the API-->
-  <div *ngIf="weatherLocations && weatherLocations.length > 0">
-    <ion-card *ngFor=" let location of weatherLocations" >
+ 
+  <!-- Loops thorugh the weather location from  the storage array and displays the latest data for each from the API-->
+  <ion-card *ngFor=" let location of weatherLocations" >
     <ion-card-title>{{location.name}}</ion-card-title>
     <img  [src]="'https://openweathermap.org/img/wn/' + location.weather[0].icon + '@2x.png'" alt="Weather Icon" />
       
@@ -66,19 +49,16 @@
       <ion-card-title>{{location.weather[0].description}} </ion-card-title>
       <ion-card-subtitle>{{location.main.temp}} ({{units}})</ion-card-subtitle>
     </ion-card-header>
-   <!-- The click event calls the removeLocation method that uses the id of the weather item to delete
+    <!-- The click event calls the removeLocation method that uses the id of the weather item to delete
     it from the storage array-->
     <ion-button (click)="removeLocation(location.id)" >Remove location</ion-button>
   </ion-card>
-  </div>
-  
 
 
   </div>
   
   
+  
+
   
 </ion-content>
-
-
-
