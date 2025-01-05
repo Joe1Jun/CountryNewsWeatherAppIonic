@@ -38,7 +38,10 @@ export class CountriesPage implements OnInit {
       //If searchTerm is there call the method to get the countries from the route parameter
       if(this.searchTerm){
         this.getCountriesFromParams();
-       } 
+        //If the user chooses all countries the method will be called
+       } else{
+         this.getAllCountries();
+       }
     })
 
     

@@ -25,7 +25,7 @@ export class NewsFavouritesPage implements OnInit {
   }
 
   ionViewWillEnter(){
-
+    // calls the method to retrive from storage
     this.getFavouriteNewsArticles()
   }
 
@@ -49,7 +49,7 @@ export class NewsFavouritesPage implements OnInit {
     
    
   }
-
+// 
   async removeItem(id : number){
 
     console.log(id)
