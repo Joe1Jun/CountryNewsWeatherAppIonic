@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCardHeader, IonCard,  IonCardTitle,  IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonCardHeader, IonCard,  IonCardTitle,  IonButton, IonSpinner } from '@ionic/angular/standalone';
 import { HttpOptions } from '@capacitor/core';
 import { MyHttpServiceService } from '../services/my-http-service.service';
 import { ActivatedRoute,  RouterLink } from '@angular/router';
@@ -11,12 +11,12 @@ import { Header2Page } from '../shared/header2/header2.page';
   templateUrl: './countries.page.html',
   styleUrls: ['./countries.page.scss'],
   standalone: true,
-  imports: [IonButton,IonCardTitle, IonCard, IonCardHeader, IonContent,  CommonModule, FormsModule, RouterLink, Header2Page]
+  imports: [IonSpinner, IonButton,IonCardTitle, IonCard, IonCardHeader, IonContent,  CommonModule, FormsModule, RouterLink, Header2Page]
 })
 export class CountriesPage implements OnInit {
    
-  
-  
+  // This is used to set the spinner
+  isLoading : boolean = false;
   // This will store the searchTerm parameter in the route.
   searchTerm! : string;
 
@@ -38,20 +38,18 @@ export class CountriesPage implements OnInit {
       //If searchTerm is there call the method to get the countries from the route parameter
       if(this.searchTerm){
         this.getCountriesFromParams();
-        //If there is no parameter retrieve all countries
-       
-      } else{
-        this.getAllCountries(); 
-      }
+       } 
     })
 
-    //Cant implement the function in NgOnInit as it cant handle asynchronous functions
+    
    
     
   }
 // This function will return a list of all countries by making an HTTP GET request.
 // It uses the 'get' method from MyHttpServiceService to fetch data based on the provided options.
     async getAllCountries(){
+      // Sets the loading flag to true in order to get the spinner to operate.
+      this.isLoading = true;
       // Assign the url to a local variable
        let options : HttpOptions = {
         url : "https://restcountries.com/v3.1/all"
@@ -70,10 +68,12 @@ export class CountriesPage implements OnInit {
         
       } catch (error) {
         console.log("Error retrieving countries", error);
+      }finally{
+        this.isLoading = false;
       }
         
   }
-
+// This method returns the countries specified in the input box by the user and passed to the route using parametes
   async getCountriesFromParams(){
       // Dynamically set the API URL for the search after 
       // Assign the url to a local variable
@@ -81,7 +81,9 @@ export class CountriesPage implements OnInit {
       url: `https://restcountries.com/v3.1/name/${this.searchTerm}`,
     };
     try {
+      //Gets the response from the data service
       const response = await this.mhs.get(options);
+      //Assings the variable to the response data 
       this.countries = response.data;
       
       console.log(this.countries);

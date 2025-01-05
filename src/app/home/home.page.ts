@@ -24,6 +24,8 @@ export class HomePage  {
     this.getCurrentTemperatureUnit();
   }
 
+  //This method set the default temperature method to metric if 
+  // there is no previous unit type selected
   async getCurrentTemperatureUnit(){
    
     try {
@@ -42,6 +44,7 @@ export class HomePage  {
 
   }
 
+  // This method passes the value to the 
   saveSelection(unitType : string) {
 
     try {

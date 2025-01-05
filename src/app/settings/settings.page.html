@@ -1,4 +1,5 @@
 <ion-header [translucent]="true">
+  <!-- this ion icon allows shows an arrow that allow the user to navigate back to the previous page -->
   <ion-toolbar>
     <ion-icon
         slot="start"
@@ -10,9 +11,13 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
- 
+  <!-- Define a radio group bound to the 'selectedTemperatureUnit' variable -->
+    <!-- Trigger 'saveSelection' method whenever the selection changes -->
   <ion-list>
+     <!-- ion-radio-group binds the selected value to selectedTemperatureUnit using ngModel -->
+      <!-- ionChange triggers saveSelection method whenever the selected value changes, passing the updated selectedTemperatureUnit -->
     <ion-radio-group  [(ngModel)]="selectedTemperatureUnit" (ionChange)="saveSelection(selectedTemperatureUnit)">
         
 

@@ -4,17 +4,18 @@
 
 <ion-content [fullscreen]="true"  >
 
- 
+ <!-- Shows a spinner when news items are loading-->
   <div *ngIf="isLoading" class="ion-text-center">
     <ion-spinner></ion-spinner>
     <p>Loading news...</p>
   </div>
 
-  <!-- No news message -->
+  <!-- No news message  displayed if there is no news data for this country sent back from the API-->
   <div *ngIf="!isLoading && !newsIsFetched" class="ion-text-center">
     <p>No news available for this country</p>
   </div>
  <!-- ngIf makes sure the page wont try to load if the news retrieved is null-->
+  <!-- Loops through the news articles and displays the data-->
   <div class="newsArticles" *ngIf="newsIsFetched && !isLoading">
 
     <div  *ngFor="let newsArticle of news">
@@ -34,6 +35,7 @@
         
   
       </a>
+      <!-- Calls the saveItem method on click that will store the article in storage-->
       <ion-button (click)="saveItem(newsArticle)" >Save Article </ion-button>
     
     

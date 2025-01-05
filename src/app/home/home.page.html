@@ -3,8 +3,8 @@
 <ion-content [fullscreen]="true">
   <ion-input placeholder="Enter Country" [(ngModel)]="searchTerm"></ion-input>
   <br>
-  <!--The button will route to the countries page-->
   
+  <!-- Simply has button that link to different pages-->
   <div class="buttons">
     <ion-button [routerLink]="['/countries/', searchTerm]" >Search</ion-button>
     <br>

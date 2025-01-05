@@ -4,17 +4,23 @@
   <!--Used the card component from  https://ionicframework.com/docs/api/card -->
   <!-- The for loop will loop through all the countries and display each property defined in the code-->
   <!--The atributes are found from the console.logs used in the CountriesPage class -->
+  <div *ngIf="isLoading" class="ion-text-center">
+    <ion-spinner></ion-spinner>
+    <p>Loading Countries...</p>
+  </div>
+
   <ion-card *ngFor="let country of countries" >
     <img alt="CountryFlag" src="{{country.flags.png}}" />
     <ion-card-header>
       <ion-card-title>{{country.name.common}} </ion-card-title>
      </ion-card-header>
      <!--This button will route to the news page-->
+     <!-- The parameters are passed to the news page -->
      <ion-button [routerLink]="['/news', country.name.common, country.cca2]">News</ion-button>
      <br>
      <!--This button will route to the weather page-->
     
-    <!-- <ion-button [routerLink]="['/weather', country.capitalInfo.latlng[0], country.capitalInfo.latlng[1]]">Weather</ion-button>  -->  
+    <!-- The parameters are passed to the weather page -->
      <ion-button [routerLink]="['/weather', country.name.common, country.cca2, country.capital[0]]">Weather</ion-button>
   </ion-card>
 </ion-content>

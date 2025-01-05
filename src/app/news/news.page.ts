@@ -21,8 +21,9 @@ export class NewsPage implements OnInit {
  country! :string;
  countryCode! : string; 
  news : any [] = [];
- // Sets news fetched to false. If this is false a message is displayed to the user
- isLoading: boolean = false;  // Add this new property
+  // This flag controls the spinner and also allows the newsIsFetched flag to be set in the correct sequence.
+  isLoading: boolean = false;  
+   // Sets news fetched to false. If this is false a message is displayed to the user
   newsIsFetched: boolean = false;
  
   
@@ -32,8 +33,8 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
     
     // This fetches the news api from the api service
    this.apiKey = this.mApi.getNewsAPI();
-   this.newsIsFetched = false; // Explicitly set to false initially
-
+    
+   // Sets the variables to the parameters passed via the route handler
     this.route.paramMap.subscribe((params) => {
       this.country = params.get('country') || ' ';
       this.countryCode = params.get('countryCode') || '';
@@ -46,10 +47,6 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
      
   }
 
-  ionViewWillEnter(){
-    
-
-  }
 
   
   //This asynchronous function will call the get function from the myHttpService
@@ -68,7 +65,7 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
 
     // Check if data exists in the response
     if (response.data && response.data.results && response.data.results.length > 0) {
-      this.news = response.data;  // Populate the news array
+      this.news = response.data;           // Populate the news array
       this.newsIsFetched = true;          // Mark as fetched only after valid data is received
     } else {
       this.newsIsFetched = false;         // No news data
@@ -95,11 +92,12 @@ constructor(private mhs : MyHttpServiceService, private mds : DataServiceService
 
   }
   
-
+// Calls the data service to save the news article to the storage array
   saveItem(newsArticle : any){
 
     try {
       console.log(newsArticle)
+      //The full artcle is saved 
       const newsItem= {
         newsArticle : newsArticle
         
