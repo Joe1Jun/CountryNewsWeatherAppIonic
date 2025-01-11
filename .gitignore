@@ -53,8 +53,8 @@ yarn-error.log
 .history/*
 
 # Ignore the two PDF files
-/path/to/GitLink.pdf
-/path/to/Innovation.pdf
+GitLink.pdf
+Innovation.pdf
 
 
 # Miscellaneous
@@ -68,7 +68,11 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+
+
+# Ignore environment.ts
 src/environments/environment.ts
+
 
 # System files
 .DS_Store
